@@ -76,12 +76,12 @@
       flex: 0 0 auto;
     }
     .brand-mark {
-      width: 34px; height: 34px; border-radius: 10px;
-      background: #0f1320;
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--accent);
       display: grid; place-items: center;
-      box-shadow: 0 8px 20px rgba(15, 18, 30, 0.18);
+      box-shadow: 0 10px 22px rgba(216, 255, 47, 0.45);
     }
-    .brand-mark svg { width: 18px; height: 18px; }
+    .brand-mark svg { width: 22px; height: 22px; }
     .brand-title {
       font-family: var(--font-display);
       font-size: 17px; font-weight: 800; letter-spacing: -0.03em;
@@ -213,7 +213,7 @@
 
     /* ── Hero ─────────────────────────────────────────────── */
     .hero {
-      padding: 52px 46px 44px;
+      padding: 52px 46px 60px;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255, 255, 255, 0.92);
       background:
@@ -221,7 +221,10 @@
         radial-gradient(circle at 88% 10%, rgba(98, 122, 255, 0.11), transparent 20%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.78) 100%);
       box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: visible;
     }
+    .section[id] { scroll-margin-top: 24px; }
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 0.56fr) minmax(430px, 0.44fr);
@@ -270,52 +273,107 @@
     .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
     .hero-note { color: var(--muted); font-size: 13.5px; line-height: 1.45; max-width: 34rem; margin-top: 12px; }
 
+    /* Trust-row — overlay-бар по центру снизу hero */
     .trust-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 26px;
-      align-items: stretch;
+      position: absolute;
+      left: 50%; bottom: -26px;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 42px rgba(15,18,30,0.14);
+      z-index: 3;
+      max-width: calc(100% - 40px);
+      white-space: nowrap;
     }
     .trust-pill {
-      display: grid;
-      grid-template-columns: 36px minmax(0, 1fr);
-      gap: 12px;
+      display: inline-flex;
       align-items: center;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.86);
-      border: 1px solid var(--line);
-      color: #354052;
+      gap: 8px;
+      padding: 8px 14px;
+      background: transparent;
+      border: 0;
+      color: var(--ink);
+      font-family: var(--font-text);
+      font-size: 13px;
+      line-height: 1.2;
+      position: relative;
+    }
+    .trust-pill + .trust-pill::before {
+      content: ''; position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 1px; background: var(--line);
     }
     .trust-icon {
-      width: 32px; height: 32px;
-      border-radius: 10px;
-      background: rgba(15,19,32,0.05);
+      width: 24px; height: 24px;
+      border-radius: 7px;
+      background: rgba(15,19,32,0.06);
       display: grid; place-items: center;
       color: var(--ink);
       flex: 0 0 auto;
     }
-    .trust-icon svg { width: 18px; height: 18px; }
-    .trust-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-    .trust-label {
-      font-family: var(--font-display);
-      font-size: 10.5px; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--muted);
-    }
+    .trust-icon svg { width: 14px; height: 14px; }
+    .trust-body { display: inline-flex; align-items: baseline; gap: 6px; }
+    .trust-label { display: none; }
     .trust-value {
-      font-size: 13.5px; line-height: 1.35;
-      color: var(--ink); font-weight: 500;
+      font-family: var(--font-text);
+      font-size: 13px; font-weight: 500;
+      color: var(--ink);
+      line-height: 1.2;
     }
-    .trust-value strong { font-weight: 800; }
-    .trust-pill.accent {
-      background: linear-gradient(135deg, rgba(216, 255, 47, 0.22), rgba(216, 255, 47, 0.08));
-      border-color: rgba(216, 255, 47, 0.45);
-    }
+    .trust-value strong { font-weight: 700; color: var(--ink); }
     .trust-pill.accent .trust-icon {
       background: var(--accent);
-      box-shadow: 0 6px 18px rgba(216, 255, 47, 0.35);
+      box-shadow: 0 6px 16px rgba(216, 255, 47, 0.4);
+    }
+
+    /* ── Trust-row: tablet+mobile — stacked, не overlay ───── */
+    @media (max-width: 1080px) {
+      .hero { padding-bottom: 44px; }
+      .trust-row {
+        position: static;
+        transform: none;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 24px;
+        padding: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        max-width: none;
+        white-space: normal;
+      }
+      .trust-pill {
+        display: grid;
+        grid-template-columns: 32px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+      }
+      .trust-pill + .trust-pill::before { display: none; }
+      .trust-body { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+      .trust-label {
+        display: inline;
+        font-family: var(--font-display);
+        font-size: 10px; font-weight: 800;
+        text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--muted);
+        line-height: 1.2;
+      }
+      .trust-value { font-size: 12.5px; line-height: 1.4; }
+    }
+    @media (max-width: 760px) {
+      .trust-row { grid-template-columns: 1fr; gap: 8px; }
+      .trust-pill { padding: 12px 14px; }
+      .trust-value { font-size: 13px; }
     }
 
     /* ── Start card (hero right) ──────────────────────────── */
@@ -1400,8 +1458,9 @@
       <a class="brand" href="#">
         <div class="brand-mark">
           <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <path d="M16 3 C17.2 12.5, 19.5 14.8, 29 16 C19.5 17.2, 17.2 19.5, 16 29 C14.8 19.5, 12.5 17.2, 3 16 C12.5 14.8, 14.8 12.5, 16 3 Z" fill="#d8ff2f"/>
-            <circle cx="16" cy="16" r="1.8" fill="#0f1320"/>
+            <circle cx="16" cy="16" r="10" stroke="#0f1320" stroke-width="2.2" fill="none"/>
+            <circle cx="16" cy="16" r="5.5" stroke="#0f1320" stroke-width="2.2" fill="none"/>
+            <circle cx="16" cy="16" r="2" fill="#0f1320"/>
           </svg>
         </div>
         <div class="brand-title">Geo AI Advisory</div>
@@ -1451,7 +1510,7 @@
               <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="5" height="12"/><rect x="9.5" y="3" width="5" height="18"/><rect x="16" y="12" width="5" height="9"/><path d="M2 21h20"/></svg></div>
               <div class="trust-body">
                 <span class="trust-label">Big&nbsp;tech лидер</span>
-                <span class="trust-value">Управлял командами в&nbsp;<strong>Wildberries</strong> и&nbsp;<strong>Газпроме</strong> — до&nbsp;<strong>2&nbsp;000 чел.</strong></span>
+                <span class="trust-value"><strong>Wildberries</strong>, <strong>Газпром</strong> — до&nbsp;<strong>2&nbsp;000 чел.</strong></span>
               </div>
             </div>
             <div class="trust-pill">
@@ -1465,7 +1524,7 @@
               <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div>
               <div class="trust-body">
                 <span class="trust-label">Результат внедрения AI-агентов</span>
-                <span class="trust-value">Команда <strong>60&nbsp;→&nbsp;20</strong>, эффективность <strong>×5</strong> за&nbsp;3&nbsp;мес.</span>
+                <span class="trust-value">Команда <strong>60&nbsp;→&nbsp;20</strong>, эффективность <strong>×10</strong> — 20&nbsp;человек делают работу 200.</span>
               </div>
             </div>
           </div>
@@ -1518,7 +1577,7 @@
       <div class="section-head">
         <div>
           <div class="section-eyebrow">Мои реальные кейсы</div>
-          <h2 class="section-title">6 процессов, которые уже держатся на&nbsp;AI у&nbsp;меня</h2>
+          <h2 class="section-title">6 моих процессов уже&nbsp;на&nbsp;AI</h2>
         </div>
         <p class="section-lead">
           Это не маркетинг про «внедрение нейросетей», а живые контуры моей команды. По каждому — отдельный разбор: что заменили, как считаем эффект и какие грабли словили.
@@ -1725,9 +1784,9 @@
       <div class="why">
         <div class="why-header">
           <div class="section-eyebrow">Почему Гео</div>
-          <h2 class="section-title">Не теория. Живой переход команды на&nbsp;AI прямо сейчас</h2>
+          <h2 class="section-title">1 сотрудник в&nbsp;IT должен перформить как&nbsp;10</h2>
           <p class="why-lead">
-            Путь через big tech, enterprise и&nbsp;продукт — до&nbsp;живого перехода команды на&nbsp;AI-модель, который идёт прямо сейчас.
+            Прошёл путь владельца продукта в&nbsp;крупнейшем бигтехе и&nbsp;знаю, как выжимать из&nbsp;команд максимум. <strong>ИИ сокращает штат до&nbsp;думающих людей</strong> — один сотрудник начинает перформить как&nbsp;10, а&nbsp;команда из&nbsp;20&nbsp;человек делает работу 200.
           </p>
         </div>
 
@@ -1777,7 +1836,7 @@
                 <div class="now-transform">
                   <div class="now-num">60&nbsp;→&nbsp;20</div>
                   <div class="now-note">
-                    За 3 месяца без потери продукта: команда перестроена вокруг AI-агентов. <strong style="color:#fff">Эффективность ×5:</strong> 20 человек сегодня делают работу прежних 2&nbsp;000.
+                    За 3 месяца без потери продукта: команда перестроена вокруг AI-агентов. <strong style="color:#fff">Эффективность ×10:</strong> 20 человек сегодня делают работу, которую раньше тянули <strong style="color:#fff">200</strong>.
                   </div>
                 </div>
 
@@ -1802,7 +1861,7 @@
       <div class="section-head">
         <div>
           <div class="section-eyebrow">Как это работает</div>
-          <h2 class="section-title">Один человек ведёт до&nbsp;10&nbsp;задач параллельно</h2>
+          <h2 class="section-title">1 человек = 10&nbsp;задач в&nbsp;параллель</h2>
         </div>
         <p class="section-lead">
           Не один чат с GPT — целая рабочая система. Вот как идёт задача и во что превращается работа сотрудника.
@@ -1975,6 +2034,44 @@
       </div>
     </section>
 
+    <!-- ═══ Bonus / Gift ════════════════════════════════════ -->
+    <section class="section" id="bonus">
+      <div class="bonus">
+        <div class="bonus-grid">
+          <div>
+            <div class="bonus-tag">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+              Бесплатный подарок
+            </div>
+            <h2 class="bonus-title">Мой набор скиллов для Claude Code и&nbsp;Codex</h2>
+            <p class="bonus-desc">
+              Готовые скиллы, которыми я&nbsp;пользуюсь каждый день: Яндекс-Трекер, Google&nbsp;Drive/Sheets, Telegram, Telemost, HTML-отчёты, Playwright и&nbsp;другие рутины. Забирай, ставь у&nbsp;себя и&nbsp;автоматизируй то&nbsp;же самое.
+            </p>
+            <div class="bonus-cta">
+              <a class="btn btn-primary btn-lg" href="https://github.com/geo-ai-advisory/geo-ai-advisory">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#0f1320" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+                Забрать на&nbsp;GitHub
+              </a>
+              <div class="bonus-note">Публичный репозиторий, MIT-лицензия. Никаких регистраций и&nbsp;форм — просто клонируй.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="bonus-list">
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M9 11l2 2 4-4M16 2v4M8 2v4M3 10h18"/></svg>Яндекс-Трекер</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Google Sheets / Drive</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.2 2.8 11.4c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.2-14.9c.3-1.3-.5-1.8-1.3-1.3z"/></svg>Telegram-боты</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Telemost + Calendar</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>HTML-отчёты</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>hh.ru-скоринг</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>Playwright-автоматизация</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4zM4 14h16v6H4zM4 8l2 6M20 8l-2 6"/></svg>Whisper-транскрипции</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══ Offer ════════════════════════════════════════════ -->
     <section class="section" id="offer">
       <div class="offer">
@@ -2021,44 +2118,6 @@
             <a class="offer-next-link" href="https://t.me/danielspe">Узнать детали →</a>
           </div>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ Bonus / Gift ════════════════════════════════════ -->
-    <section class="section" id="bonus">
-      <div class="bonus">
-        <div class="bonus-grid">
-          <div>
-            <div class="bonus-tag">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-              Бесплатный подарок
-            </div>
-            <h2 class="bonus-title">Мой набор скиллов для Claude Code и&nbsp;Codex</h2>
-            <p class="bonus-desc">
-              Готовые скиллы, которыми я&nbsp;пользуюсь каждый день: Яндекс-Трекер, Google&nbsp;Drive/Sheets, Telegram, Telemost, HTML-отчёты, Playwright и&nbsp;другие рутины. Забирай, ставь у&nbsp;себя и&nbsp;автоматизируй то&nbsp;же самое.
-            </p>
-            <div class="bonus-cta">
-              <a class="btn btn-primary btn-lg" href="https://github.com/geo-ai-advisory/geo-ai-advisory">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#0f1320" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
-                Забрать на&nbsp;GitHub
-              </a>
-              <div class="bonus-note">Публичный репозиторий, MIT-лицензия. Никаких регистраций и&nbsp;форм — просто клонируй.</div>
-            </div>
-          </div>
-
-          <div>
-            <div class="bonus-list">
-              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M9 11l2 2 4-4M16 2v4M8 2v4M3 10h18"/></svg>Яндекс-Трекер</div>
-              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Google Sheets / Drive</div>
-              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.2 2.8 11.4c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.2-14.9c.3-1.3-.5-1.8-1.3-1.3z"/></svg>Telegram-боты</div>
-              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Telemost + Calendar</div>
-              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>HTML-отчёты</div>
-              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>hh.ru-скоринг</div>
-              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>Playwright-автоматизация</div>
-              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4zM4 14h16v6H4zM4 8l2 6M20 8l-2 6"/></svg>Whisper-транскрипции</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
