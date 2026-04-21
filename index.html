@@ -62,33 +62,26 @@
     .topbar {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 24px;
-      padding: 12px 14px 12px 20px;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid rgba(15, 19, 32, 0.06);
-      box-shadow: 0 12px 32px rgba(15, 18, 30, 0.06);
-      backdrop-filter: blur(20px);
-      margin-bottom: 28px;
+      padding: 16px 8px 16px 4px;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      backdrop-filter: none;
+      margin-bottom: 22px;
     }
     .brand {
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center; gap: 10px;
       flex: 0 0 auto;
     }
     .brand-mark {
-      width: 36px; height: 36px; border-radius: 12px;
-      background: linear-gradient(135deg, #0f1320 0%, #1a2237 100%);
+      width: 34px; height: 34px; border-radius: 10px;
+      background: #0f1320;
       display: grid; place-items: center;
-      box-shadow: 0 8px 22px rgba(15, 18, 30, 0.22), inset 0 0 0 1px rgba(255,255,255,0.06);
-      position: relative; overflow: hidden;
+      box-shadow: 0 8px 20px rgba(15, 18, 30, 0.18);
     }
-    .brand-mark::after {
-      content: ''; position: absolute;
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 14px rgba(216, 255, 47, 0.9);
-    }
-    .brand-mark svg { width: 18px; height: 18px; position: relative; z-index: 1; }
+    .brand-mark svg { width: 18px; height: 18px; }
     .brand-title {
       font-family: var(--font-display);
       font-size: 17px; font-weight: 800; letter-spacing: -0.03em;
@@ -190,32 +183,17 @@
         box-shadow: 0 14px 34px rgba(216,255,47,0.45), 0 0 0 5px rgba(216,255,47,0.1);
       }
       .mobile-cta-bar .tg-icon { width: 16px; height: 16px; }
-      /* Topbar на мобилке: компактный pill-бейдж по центру с наслоением на hero */
+      /* Topbar на мобилке: компактный, в обычном потоке, с минимальным gap до hero */
       .topbar .topbar-cta { display: none; }
       .topbar {
-        background: transparent;
-        border: none;
-        box-shadow: none;
-        backdrop-filter: none;
-        padding: 0;
-        margin: 12px 0 -22px;
-        justify-content: center;
-        position: relative;
-        z-index: 3;
+        padding: 4px 6px;
+        margin-bottom: 8px;
+        justify-content: flex-start;
+        gap: 8px;
       }
-      .brand {
-        flex: 0 0 auto;
-        padding: 6px 16px 6px 6px;
-        border-radius: 999px;
-        background: #fff;
-        border: 1px solid rgba(15, 19, 32, 0.08);
-        box-shadow: 0 14px 30px rgba(15, 18, 30, 0.14);
-        gap: 10px;
-      }
-      .brand-mark { width: 28px; height: 28px; border-radius: 9px; }
+      .brand-mark { width: 26px; height: 26px; border-radius: 8px; }
       .brand-mark svg { width: 14px; height: 14px; }
-      .brand-title { font-size: 14px; }
-      .hero { padding-top: 44px; }
+      .brand-title { font-size: 13.5px; }
     }
 
     .btn-lg {
@@ -460,7 +438,7 @@
     /* ── Processes (asymmetric) ───────────────────────────── */
     .processes {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(12, 1fr);
       grid-auto-rows: minmax(220px, auto);
       gap: 20px;
     }
@@ -541,6 +519,7 @@
       font-family: var(--font-display);
       font-size: 11px; font-weight: 800;
       letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 8px;
     }
     .p-dev .p-kicker { color: var(--ink); }
     .p-list { display: grid; gap: 8px; color: #354052; font-size: 15.5px; line-height: 1.5; }
@@ -580,10 +559,10 @@
     .p-case-link:hover { gap: 10px; }
     .p-dev .p-case-link { color: var(--accent); border-top-color: rgba(255,255,255,0.14); }
 
-    /* Asymmetric placements */
-    .p-hr       { grid-column: span 3; }
-    .p-support  { grid-column: span 3; }
-    .p-dev      { grid-column: span 4; background: var(--ink); color: #fff; border-color: rgba(255,255,255,0.1); }
+    /* 12-col grid — Dev 2/3 + HR 1/3 в ряду, Delivery full, остальные по 1/3 */
+    .p-hr       { grid-column: span 4; }
+    .p-support  { grid-column: span 4; }
+    .p-dev      { grid-column: span 8; background: var(--ink); color: #fff; border-color: rgba(255,255,255,0.1); }
     .p-dev .p-list { color: var(--on-dark); }
     .p-dev .p-list li::before { background: var(--accent); }
     .p-dev .p-big-stat { border-top-color: rgba(255,255,255,0.14); }
@@ -675,9 +654,98 @@
       text-align: right;
     }
     .dev-row.after .dev-stat { color: var(--accent); font-size: 15px; }
-    .p-delivery { grid-column: span 2; }
-    .p-finance  { grid-column: span 3; }
-    .p-ops      { grid-column: span 3; }
+    /* Delivery — вторая тёмная карточка с фиолетовым оттенком (не сливается с Dev) */
+    .p-delivery {
+      grid-column: span 12;
+      background: linear-gradient(135deg, #1e1942 0%, #13183a 50%, #0f1423 100%);
+      color: #fff;
+      border-color: rgba(160,130,255,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .p-delivery::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(216,255,47,0.1), transparent 35%),
+        radial-gradient(circle at 92% 100%, rgba(160,130,255,0.25), transparent 45%);
+      pointer-events: none;
+    }
+    .p-delivery > * { position: relative; }
+    .p-delivery .p-list { color: var(--on-dark); }
+    .p-delivery .p-list li::before { background: var(--accent); }
+    .p-delivery .p-icon { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); }
+    .p-delivery .p-case-link { color: var(--accent); border-top-color: rgba(255,255,255,0.14); }
+    .p-finance  { grid-column: span 4; }
+    .p-ops      { grid-column: span 4; }
+
+    /* AI-PM tree: входы → ядро → выходы */
+    .ai-pm-tree {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 22px;
+      align-items: center;
+      margin-top: 18px;
+      padding-top: 20px;
+      border-top: 1px dashed rgba(255,255,255,0.14);
+    }
+    .tree-col { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .tree-label {
+      font-family: var(--font-display);
+      font-size: 10.5px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--on-dark-2);
+      margin-bottom: 6px;
+    }
+    .tree-node {
+      display: grid; grid-template-columns: 20px minmax(0, 1fr);
+      gap: 10px; align-items: center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 13px; font-weight: 500;
+      color: #fff;
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .tree-node:hover { background: rgba(255,255,255,0.09); border-color: rgba(216,255,47,0.35); }
+    .tree-node svg { width: 16px; height: 16px; color: var(--accent); }
+    .tree-core {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px;
+      padding: 26px 22px;
+      min-width: 170px;
+      border-radius: var(--radius-lg);
+      background: var(--accent);
+      color: var(--ink);
+      box-shadow: 0 22px 50px rgba(216,255,47,0.45);
+      align-self: center;
+      text-align: center;
+      position: relative;
+    }
+    .tree-core::before, .tree-core::after {
+      content: ''; position: absolute; top: 50%;
+      height: 2px; width: 22px;
+      background: repeating-linear-gradient(90deg, rgba(216,255,47,0.7) 0 5px, transparent 5px 10px);
+    }
+    .tree-core::before { left: -22px; }
+    .tree-core::after  { right: -22px; }
+    .tree-core-ico {
+      width: 46px; height: 46px;
+      border-radius: 14px;
+      background: var(--ink);
+      display: grid; place-items: center;
+    }
+    .tree-core-ico svg { width: 24px; height: 24px; color: var(--accent); }
+    .tree-core-title {
+      font-family: var(--font-display);
+      font-size: 18px; font-weight: 800;
+      letter-spacing: -0.02em; line-height: 1;
+    }
+    .tree-core-sub {
+      font-size: 10.5px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      opacity: 0.7;
+    }
 
     /* ── Why Geo ──────────────────────────────────────────── */
     .why {
@@ -1302,7 +1370,13 @@
       .stop.now { padding: 22px 20px 24px; }
       .t-logo { width: 44px; height: 44px; font-size: 15px; border-radius: 12px; }
       .now-transform { grid-template-columns: 1fr; gap: 10px; padding: 16px 18px; }
-      .now-contours { grid-template-columns: repeat(2, 1fr); }
+      .now-contours { grid-template-columns: 1fr; }
+      .stop.now { padding: 20px 18px 22px; }
+      .now-num { font-size: 38px; }
+      .now-transform { padding: 14px 16px; }
+      .ai-pm-tree { grid-template-columns: 1fr; gap: 14px; }
+      .tree-core { min-width: 0; padding: 20px 18px; }
+      .tree-core::before, .tree-core::after { display: none; }
       .bonus { padding: 32px 22px; }
       .bonus-grid { grid-template-columns: 1fr; gap: 24px; }
       .bonus-title { font-size: clamp(1.7rem, 6.4vw, 2.2rem); }
@@ -1325,9 +1399,9 @@
     <div class="topbar">
       <a class="brand" href="#">
         <div class="brand-mark">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M16 3 C17.2 12.5, 19.5 14.8, 29 16 C19.5 17.2, 17.2 19.5, 16 29 C14.8 19.5, 12.5 17.2, 3 16 C12.5 14.8, 14.8 12.5, 16 3 Z" fill="#d8ff2f"/>
+            <circle cx="16" cy="16" r="1.8" fill="#0f1320"/>
           </svg>
         </div>
         <div class="brand-title">Geo AI Advisory</div>
@@ -1405,7 +1479,7 @@
 
           <div class="start-price-row">
             <span class="start-price-num">$500</span>
-            <span class="start-price-unit">за 1 час · или эквивалент в&nbsp;рублях</span>
+            <span class="start-price-unit">или 50&nbsp;000&nbsp;₽ · за 1&nbsp;час</span>
           </div>
 
           <ol class="step-list">
@@ -1451,62 +1525,7 @@
         </p>
       </div>
 
-      <div class="processes">
-
-        <!-- HR -->
-        <div class="p-card p-hr">
-          <div class="p-head">
-            <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ghr" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF7FB"/><stop offset="1" stop-color="#FFE4F3"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#ghr)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#E6D8E2"/><circle cx="40" cy="36" r="10" stroke="#1A2237" stroke-width="3"/><path d="M24 64c4-9 11-14 16-14s12 5 16 14" stroke="#1A2237" stroke-width="3" stroke-linecap="round"/><path d="M62 31h12m-6-6v12" stroke="#6077FF" stroke-width="3" stroke-linecap="round"/></svg></div>
-            <div>
-              <div class="p-kicker">HR / найм</div>
-              <div class="p-title">Найм без&nbsp;отдельного HR-контура</div>
-            </div>
-          </div>
-          <ul class="p-list">
-            <li>AI-агенты шерстят hh.ru, LinkedIn и Telegram под конкретный профиль.</li>
-            <li>Раундовая методология: автоскоринг, сравнительный анализ, ранжированный shortlist.</li>
-            <li>Подготовка персональных вопросов и первичная оценка — до моего интервью.</li>
-            <li>Закрывали так Delivery-менеджеров, SRE и продактов без участия HR.</li>
-          </ul>
-          <div class="mini-flow">
-            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>hh / LinkedIn / TG</span>
-            <span class="mf-arrow">→</span>
-            <span class="mf-item accent"><svg viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI-скоринг</span>
-            <span class="mf-arrow">→</span>
-            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Shortlist</span>
-          </div>
-          <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
-        </div>
-
-        <!-- Dashboard / Analytics -->
-        <div class="p-card p-support">
-          <div class="p-head">
-            <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gds" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#F0FFF4"/><stop offset="1" stop-color="#D5F7E0"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#gds)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#C8E8D1"/><path d="M22 68L36 52L48 60L66 38L76 46" stroke="#1A2237" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="36" cy="52" r="3.5" fill="#1A2237"/><circle cx="48" cy="60" r="3.5" fill="#1A2237"/><circle cx="66" cy="38" r="3.5" fill="#6077FF"/><circle cx="76" cy="46" r="3.5" fill="#6077FF"/></svg></div>
-            <div>
-              <div class="p-kicker">Аналитика / Dashboard</div>
-              <div class="p-title">Partner-отчёты on&nbsp;the&nbsp;fly</div>
-            </div>
-          </div>
-          <ul class="p-list">
-            <li>SQL → готовая веб-страница партнёру за час, без слайдов и перекладывания цифр.</li>
-            <li>Executive showcase с выводами и рекомендациями, а не просто графики.</li>
-            <li>Аналитика и операционное действие живут в одном контуре: увидел отклонение → тут же поменял правила выдачи.</li>
-          </ul>
-          <div class="p-big-stat">
-            <div class="p-big-stat-num">1 час</div>
-            <div class="p-big-stat-label">от SQL-запроса до готового отчёта партнёру</div>
-          </div>
-          <div class="mini-flow">
-            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>SQL</span>
-            <span class="mf-arrow">→</span>
-            <span class="mf-item accent"><svg viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI</span>
-            <span class="mf-arrow">→</span>
-            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>Отчёт партнёру</span>
-          </div>
-          <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
-        </div>
-
-        <!-- Dev (dark wide) -->
+      <div class="processes"><!-- Dev (dark wide) -->
         <div class="p-card p-dev">
           <div class="p-head">
             <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gdv" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#F4F7FF"/><stop offset="1" stop-color="#E4EDFF"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#gdv)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#D8E0F0"/><path d="M37 33 24 48l13 15M59 33l13 15-13 15M51 26 44 70" stroke="#1A2237" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -1547,7 +1566,34 @@
           <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
         </div>
 
-        <!-- Delivery / AI PM -->
+        
+
+        <!-- HR -->
+        <div class="p-card p-hr">
+          <div class="p-head">
+            <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ghr" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF7FB"/><stop offset="1" stop-color="#FFE4F3"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#ghr)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#E6D8E2"/><circle cx="40" cy="36" r="10" stroke="#1A2237" stroke-width="3"/><path d="M24 64c4-9 11-14 16-14s12 5 16 14" stroke="#1A2237" stroke-width="3" stroke-linecap="round"/><path d="M62 31h12m-6-6v12" stroke="#6077FF" stroke-width="3" stroke-linecap="round"/></svg></div>
+            <div>
+              <div class="p-kicker">HR / найм</div>
+              <div class="p-title">Найм без&nbsp;отдельного HR-контура</div>
+            </div>
+          </div>
+          <ul class="p-list">
+            <li>AI-агенты шерстят hh.ru, LinkedIn и Telegram под конкретный профиль.</li>
+            <li>Раундовая методология: автоскоринг, сравнительный анализ, ранжированный shortlist.</li>
+            <li>Подготовка персональных вопросов и первичная оценка — до моего интервью.</li>
+            <li>Закрывали так Delivery-менеджеров, SRE и продактов без участия HR.</li>
+          </ul>
+          <div class="mini-flow">
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>hh / LinkedIn / TG</span>
+            <span class="mf-arrow">→</span>
+            <span class="mf-item accent"><svg viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI-скоринг</span>
+            <span class="mf-arrow">→</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Shortlist</span>
+          </div>
+          <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
+        </div>
+
+        <!-- Delivery / AI PM — тёмная widepanel с tree-схемой -->
         <div class="p-card p-delivery">
           <div class="p-head">
             <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gdl" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#F7F3FF"/><stop offset="1" stop-color="#ECE4FF"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#gdl)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#DDD7EF"/><rect x="24" y="24" width="48" height="48" rx="12" stroke="#1A2237" stroke-width="3"/><path d="M34 41h28M34 52h20" stroke="#1A2237" stroke-width="3" stroke-linecap="round"/><path d="m56 25 8 8-20 20h-8v-8l20-20Z" stroke="#6077FF" stroke-width="2.6" stroke-linejoin="round"/></svg></div>
@@ -1557,16 +1603,65 @@
             </div>
           </div>
           <ul class="p-list">
-            <li>AI читает чаты, тикеты и PR — готовит weekly update сам.</li>
-            <li>Собирает риски, блокеры и action items до созвона.</li>
-            <li>Держит follow-up по задачам и напоминает ответственным в Tracker.</li>
+            <li>Читает чаты команды, Tracker и PR — сам пишет <strong>weekly update</strong> до совещания.</li>
+            <li>Собирает риски, блокеры и action items — руководитель заходит на созвон с готовой картиной.</li>
+            <li>Двигает follow-up по задачам, напоминает ответственным в Tracker, закрывает back-office.</li>
+            <li>Генерит черновики договоров и внутренних регламентов из исходных документов и переписок.</li>
           </ul>
+
+          <div class="ai-pm-tree">
+            <div class="tree-col">
+              <span class="tree-label">На вход</span>
+              <div class="tree-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Чаты команды</div>
+              <div class="tree-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M9 11l2 2 4-4"/></svg>Яндекс-Трекер</div>
+              <div class="tree-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Google Sheets</div>
+              <div class="tree-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M6 8.5v7M8.5 6h4A5 5 0 0 1 18 11v.5M8.5 18h4A5 5 0 0 0 18 13v-.5"/></svg>GitLab / PR</div>
+              <div class="tree-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email / доки</div>
+            </div>
+
+            <div class="tree-core">
+              <div class="tree-core-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+              <div class="tree-core-title">AI-PM</div>
+              <div class="tree-core-sub">Оркестратор</div>
+            </div>
+
+            <div class="tree-col">
+              <span class="tree-label">На выход</span>
+              <div class="tree-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h8"/></svg>Weekly update</div>
+              <div class="tree-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.2 2.8 11.4c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.2-14.9c.3-1.3-.5-1.8-1.3-1.3z"/></svg>Сообщения в Telegram</div>
+              <div class="tree-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Фичи в разработку</div>
+              <div class="tree-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>Отчёты руководству</div>
+              <div class="tree-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6"/><path d="m8.5 14 2 2 4-4"/></svg>Договоры и регламенты</div>
+            </div>
+          </div>
+
+          <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
+        </div>
+
+        <!-- Dashboard / Analytics -->
+        <div class="p-card p-support">
+          <div class="p-head">
+            <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gds" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#F0FFF4"/><stop offset="1" stop-color="#D5F7E0"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#gds)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#C8E8D1"/><path d="M22 68L36 52L48 60L66 38L76 46" stroke="#1A2237" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="36" cy="52" r="3.5" fill="#1A2237"/><circle cx="48" cy="60" r="3.5" fill="#1A2237"/><circle cx="66" cy="38" r="3.5" fill="#6077FF"/><circle cx="76" cy="46" r="3.5" fill="#6077FF"/></svg></div>
+            <div>
+              <div class="p-kicker">Аналитика / Dashboard</div>
+              <div class="p-title">Partner-отчёты on&nbsp;the&nbsp;fly</div>
+            </div>
+          </div>
+          <ul class="p-list">
+            <li>SQL → готовая веб-страница партнёру за час, без слайдов и перекладывания цифр.</li>
+            <li>Executive showcase с выводами и рекомендациями, а не просто графики.</li>
+            <li>Аналитика и операционное действие живут в одном контуре: увидел отклонение → тут же поменял правила выдачи.</li>
+          </ul>
+          <div class="p-big-stat">
+            <div class="p-big-stat-num">1 час</div>
+            <div class="p-big-stat-label">от SQL-запроса до готового отчёта партнёру</div>
+          </div>
           <div class="mini-flow">
-            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Чаты · Tracker · PR</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>SQL</span>
             <span class="mf-arrow">→</span>
-            <span class="mf-item accent"><svg viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI-PM</span>
+            <span class="mf-item accent"><svg viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI</span>
             <span class="mf-arrow">→</span>
-            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h8"/></svg>Weekly</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>Отчёт партнёру</span>
           </div>
           <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
         </div>
@@ -1900,7 +1995,7 @@
             <div>
               <div class="plan-tag">Первый шаг</div>
               <div class="plan-price">$500</div>
-              <div class="plan-unit">за 1 час · или эквивалент в рублях</div>
+              <div class="plan-unit">или 50&nbsp;000&nbsp;₽ · за 1&nbsp;час</div>
               <p class="plan-desc">
                 Первый разбор вашей компании. Находим самый дорогой ручной процесс и фиксируем маршрут запуска для первого AI-агента. После этого решаете, продолжать или нет.
               </p>
@@ -1921,8 +2016,8 @@
 
           <!-- Next step note: 4 sessions package -->
           <div class="offer-next">
-            <span class="offer-next-tag">Если fit есть</span>
-            <span class="offer-next-content">Дальше — <strong>пакет из 4 встреч по 2,5 часа</strong> под все ключевые процессы компании, от бухгалтерии до разработки. Длительность каждой встречи продлевается при необходимости.</span>
+            <span class="offer-next-tag">Пакет 4 встречи</span>
+            <span class="offer-next-content">Если берёте сразу <strong>пакет из&nbsp;4&nbsp;встреч</strong> — каждая встреча <strong>до&nbsp;2,5&nbsp;часов по&nbsp;желанию за&nbsp;ту&nbsp;же цену</strong>. Покрывает все ключевые процессы компании: от&nbsp;бухгалтерии до&nbsp;разработки.</span>
             <a class="offer-next-link" href="https://t.me/danielspe">Узнать детали →</a>
           </div>
 
@@ -1944,7 +2039,7 @@
               Готовые скиллы, которыми я&nbsp;пользуюсь каждый день: Яндекс-Трекер, Google&nbsp;Drive/Sheets, Telegram, Telemost, HTML-отчёты, Playwright и&nbsp;другие рутины. Забирай, ставь у&nbsp;себя и&nbsp;автоматизируй то&nbsp;же самое.
             </p>
             <div class="bonus-cta">
-              <a class="btn btn-primary btn-lg" href="https://github.com/engwatch/geo-ai-advisory">
+              <a class="btn btn-primary btn-lg" href="https://github.com/geo-ai-advisory/geo-ai-advisory">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#0f1320" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
                 Забрать на&nbsp;GitHub
               </a>

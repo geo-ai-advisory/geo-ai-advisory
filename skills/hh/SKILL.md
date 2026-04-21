@@ -51,7 +51,7 @@ description: Use when user invokes /hh or asks to search for candidates on hh.ru
 Шаблон оформления описан в `~/.claude/skills/hh-resume-search/SKILL.md` (секция "HTML-шортлист: шаблон оформления").
 - Светлая тема, карточки с цветовой полоской по тиру
 - Шифрование AES-256-GCM, деплой на GitHub Pages
-- Референс: https://engwatch.github.io/hh-search-shortlist/
+- Референс: https://geo-ai-advisory.github.io/hh-search-shortlist/
 
 ## После выполнения
 - Обновить `Projects/hh/CONTEXT.md` (новые кандидаты, статусы, история поисков)

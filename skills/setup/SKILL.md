@@ -19,10 +19,10 @@ description: Use when user invokes /setup or asks to set up the Claude Code self
 
 ### Полная установка (`/setup`)
 1. Проверь есть ли `~/.claude/CLAUDE.md`
-   - Если нет: скачай из https://raw.githubusercontent.com/engwatch/geo-ai-advisory/main/guides/claude-learning-system/CLAUDE.global.md
+   - Если нет: скачай из https://raw.githubusercontent.com/geo-ai-advisory/geo-ai-advisory/main/guides/claude-learning-system/CLAUDE.global.md
    - Если есть: обновляй только при реальной необходимости
 2. Проверь есть ли `./CLAUDE.md` в корне проекта
-   - Если нет: скачай из https://raw.githubusercontent.com/engwatch/geo-ai-advisory/main/guides/claude-learning-system/CLAUDE.project.md
+   - Если нет: скачай из https://raw.githubusercontent.com/geo-ai-advisory/geo-ai-advisory/main/guides/claude-learning-system/CLAUDE.project.md
 3. Проверь есть ли `Projects/`
    - Если нет: создай
 4. Проверь есть ли `Projects/self-learning-system/CONTEXT.md`

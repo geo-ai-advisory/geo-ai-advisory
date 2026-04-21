@@ -104,9 +104,9 @@
 
 ## Ключевые ссылки
 
-- Шортлист: https://engwatch.github.io/hh-delivery-shortlist/ (пароль 0903)
-- Интервью-план: https://engwatch.github.io/dm-interview-plan/ (пароль 0903)
-- Оценка Гладких: https://engwatch.github.io/assessment-gladkikh/ (пароль 0903)
+- Шортлист: https://geo-ai-advisory.github.io/hh-delivery-shortlist/ (пароль 0903)
+- Интервью-план: https://geo-ai-advisory.github.io/dm-interview-plan/ (пароль 0903)
+- Оценка Гладких: https://geo-ai-advisory.github.io/assessment-gladkikh/ (пароль 0903)
 
 ## После выполнения
 

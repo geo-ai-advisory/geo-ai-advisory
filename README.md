@@ -2,7 +2,7 @@
 
 Публичный набор скиллов для Claude Code / Codex и лендинг AI-advisory практики.
 
-- Лендинг: [engwatch.github.io/geo-ai-advisory](https://engwatch.github.io/geo-ai-advisory/)
+- Лендинг: [geo-ai-advisory.github.io/geo-ai-advisory](https://geo-ai-advisory.github.io/geo-ai-advisory/)
 - Автор / контакт: [@danielspe](https://t.me/danielspe)
 
 Репозиторий собран из универсальных скиллов автоматизации на базе Claude Code. Внутренние, компания-специфичные скиллы вынесены в отдельные приватные репозитории и сюда не попадают.
@@ -17,12 +17,12 @@
 ```bash
 mkdir -p ~/.claude/skills/<skill-name>
 curl -o ~/.claude/skills/<skill-name>/SKILL.md \
-  https://raw.githubusercontent.com/engwatch/geo-ai-advisory/main/skills/<skill-name>/SKILL.md
+  https://raw.githubusercontent.com/geo-ai-advisory/geo-ai-advisory/main/skills/<skill-name>/SKILL.md
 ```
 
 ### Все скиллы разом
 ```bash
-git clone https://github.com/engwatch/geo-ai-advisory.git /tmp/geo-ai-advisory
+git clone https://github.com/geo-ai-advisory/geo-ai-advisory.git /tmp/geo-ai-advisory
 cp -r /tmp/geo-ai-advisory/skills/* ~/.claude/skills/
 ```
 
@@ -102,4 +102,4 @@ cp -r /tmp/geo-ai-advisory/skills/* ~/.claude/skills/
 ## Контакты
 
 - Telegram: [@danielspe](https://t.me/danielspe)
-- Лендинг: [engwatch.github.io/geo-ai-advisory](https://engwatch.github.io/geo-ai-advisory/)
+- Лендинг: [geo-ai-advisory.github.io/geo-ai-advisory](https://geo-ai-advisory.github.io/geo-ai-advisory/)

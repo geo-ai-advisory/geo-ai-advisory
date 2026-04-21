@@ -73,7 +73,7 @@ page.goto('/search/resume') → fill input → Enter
 
 ## HTML-шортлист: шаблон оформления
 
-**Референс:** https://engwatch.github.io/hh-search-shortlist/
+**Референс:** https://geo-ai-advisory.github.io/hh-search-shortlist/
 
 ### Дизайн-принципы
 - **Светлая тема** — `background:#f5f6fa`, карточки на белом `#fff`
