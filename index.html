@@ -2150,13 +2150,26 @@
   </div>
 
   <script>
+    // Smooth-scroll для якорных ссылок (#processes, #why, #how, #offer, #bonus)
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      var href = a.getAttribute('href');
+      if (href === '#' || href.length < 2) return;
+      a.addEventListener('click', function(e) {
+        var target = document.getElementById(href.slice(1));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState(null, '', href);
+      });
+    });
+
+    // Sticky mobile CTA bar
     (function() {
       var bar = document.querySelector('.mobile-cta-bar');
       var trigger = document.querySelector('.hero-actions .btn-primary');
       if (!bar || !trigger) return;
       function update() {
         var rect = trigger.getBoundingClientRect();
-        // показываем когда кнопка hero ушла за верх экрана
         var visible = rect.bottom < 0;
         bar.classList.toggle('visible', visible);
         bar.setAttribute('aria-hidden', visible ? 'false' : 'true');
