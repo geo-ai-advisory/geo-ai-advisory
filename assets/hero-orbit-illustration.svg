@@ -1,0 +1,82 @@
+<svg width="920" height="720" viewBox="0 0 920 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="80" x2="760" y2="660" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E2741"/>
+      <stop offset="1" stop-color="#121827"/>
+    </linearGradient>
+    <radialGradient id="glowBlue" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(688 134) rotate(129.806) scale(240.729 243.652)">
+      <stop stop-color="#6379FF" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#6379FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowLime" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(296 154) rotate(54.628) scale(216.384 210.763)">
+      <stop stop-color="#D7FF34" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#D7FF34" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="card" x1="338" y1="200" x2="582" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3E5265" stop-opacity=".98"/>
+      <stop offset=".54" stop-color="#324156" stop-opacity=".98"/>
+      <stop offset="1" stop-color="#2B3550" stop-opacity=".98"/>
+    </linearGradient>
+    <linearGradient id="centerGlow" x1="352" y1="214" x2="570" y2="502" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D7FF34" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#6E82FF" stop-opacity=".12"/>
+    </linearGradient>
+    <filter id="shadow" x="20" y="20" width="880" height="680" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#0B1020" flood-opacity=".3"/>
+    </filter>
+    <filter id="softGlow" x="0" y="0" width="920" height="720" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="42"/>
+    </filter>
+    <filter id="nodeShadow" x="90" y="120" width="740" height="500" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0D1425" flood-opacity=".24"/>
+    </filter>
+  </defs>
+
+  <rect x="34" y="34" width="852" height="652" rx="40" fill="url(#bg)"/>
+  <g opacity=".9" filter="url(#softGlow)">
+    <circle cx="694" cy="150" r="120" fill="url(#glowBlue)"/>
+    <circle cx="286" cy="142" r="108" fill="url(#glowLime)"/>
+    <circle cx="478" cy="610" r="120" fill="#23304A"/>
+  </g>
+
+  <rect x="78" y="82" width="764" height="556" rx="34" fill="#243048" fill-opacity=".72" stroke="rgba(255,255,255,.08)"/>
+  <rect x="78" y="82" width="764" height="556" rx="34" stroke="white" stroke-opacity=".08"/>
+
+  <g opacity=".42">
+    <circle cx="460" cy="356" r="144" stroke="#B8C5FF" stroke-opacity=".32" stroke-dasharray="4 8"/>
+    <circle cx="460" cy="356" r="86" stroke="#D7FF34" stroke-opacity=".34"/>
+    <path d="M247 201C330 176 375 182 460 215" stroke="#C8D2FF" stroke-opacity=".22" stroke-dasharray="5 8"/>
+    <path d="M674 213C602 189 548 191 460 219" stroke="#C8D2FF" stroke-opacity=".22" stroke-dasharray="5 8"/>
+    <path d="M263 488C332 517 388 525 456 494" stroke="#C8D2FF" stroke-opacity=".22" stroke-dasharray="5 8"/>
+    <path d="M666 488C606 519 536 521 463 496" stroke="#C8D2FF" stroke-opacity=".22" stroke-dasharray="5 8"/>
+  </g>
+
+  <g filter="url(#nodeShadow)">
+    <rect x="154" y="142" width="180" height="64" rx="22" fill="white" fill-opacity=".1" stroke="white" stroke-opacity=".1"/>
+    <text x="182" y="182" fill="white" font-size="17" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">Найм</text>
+
+    <rect x="588" y="154" width="178" height="64" rx="22" fill="white" fill-opacity=".12" stroke="white" stroke-opacity=".12"/>
+    <text x="616" y="194" fill="white" font-size="17" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">Разработка</text>
+
+    <rect x="172" y="444" width="166" height="64" rx="22" fill="white" fill-opacity=".1" stroke="white" stroke-opacity=".1"/>
+    <text x="202" y="484" fill="white" font-size="17" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">Саппорт</text>
+
+    <rect x="594" y="436" width="170" height="64" rx="22" fill="white" fill-opacity=".1" stroke="white" stroke-opacity=".1"/>
+    <text x="626" y="476" fill="white" font-size="17" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">Сверки</text>
+
+    <rect x="344" y="194" width="232" height="294" rx="30" fill="url(#card)" stroke="white" stroke-opacity=".12"/>
+    <rect x="344" y="194" width="232" height="294" rx="30" fill="url(#centerGlow)"/>
+    <text x="400" y="248" fill="#ECF0FF" fill-opacity=".78" font-size="13" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700" letter-spacing="1.8">ЦЕНТР УПРАВЛЕНИЯ</text>
+    <text x="440" y="322" text-anchor="middle" fill="white" font-size="34" font-family="Manrope, Arial, sans-serif" font-weight="800">1</text>
+    <text x="460" y="376" text-anchor="middle" fill="white" font-size="34" font-family="Manrope, Arial, sans-serif" font-weight="800">сотрудник</text>
+    <text x="460" y="420" text-anchor="middle" fill="#E1E7FF" fill-opacity=".86" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif">ставит задачу, держит</text>
+    <text x="460" y="446" text-anchor="middle" fill="#E1E7FF" fill-opacity=".86" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif">приоритет и принимает</text>
+    <text x="460" y="472" text-anchor="middle" fill="#E1E7FF" fill-opacity=".86" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif">результат</text>
+  </g>
+
+  <rect x="104" y="564" width="716" height="54" rx="18" fill="white" fill-opacity=".08" stroke="white" stroke-opacity=".08"/>
+  <text x="132" y="598" fill="white" font-size="14" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">до 20 AI-агентов под одной ролью</text>
+  <text x="468" y="598" fill="#DFE5FF" fill-opacity=".72" font-size="14" font-family="IBM Plex Sans, Arial, sans-serif">человек больше не делает всё руками. Он управляет потоком.</text>
+
+  <text x="108" y="122" fill="#D6DDF5" fill-opacity=".78" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700" letter-spacing="2">ПРОСТАЯ КАРТИНКА НОВОЙ МОДЕЛИ</text>
+</svg>

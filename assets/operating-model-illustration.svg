@@ -1,0 +1,124 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="panelBg" x1="180" y1="72" x2="1102" y2="660" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F2840"/>
+      <stop offset="1" stop-color="#161C2C"/>
+    </linearGradient>
+    <linearGradient id="greenCard" x1="139" y1="452" x2="433" y2="598" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A3B3F"/>
+      <stop offset="1" stop-color="#24323A"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="872" y1="134" x2="1120" y2="280" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2B3550"/>
+      <stop offset="1" stop-color="#24314B"/>
+    </linearGradient>
+    <filter id="drop" x="40" y="40" width="1200" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#0D111D" flood-opacity=".24"/>
+    </filter>
+  </defs>
+
+  <rect x="58" y="58" width="1164" height="604" rx="42" fill="url(#panelBg)" filter="url(#drop)"/>
+  <rect x="58" y="58" width="1164" height="604" rx="42" stroke="white" stroke-opacity=".06"/>
+
+  <text x="110" y="118" fill="#C7D0F3" fill-opacity=".76" font-size="16" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700" letter-spacing="2">СХЕМА 01. КАК ИДЁТ ЗАДАЧА</text>
+
+  <g>
+    <rect x="108" y="152" width="172" height="158" rx="24" fill="white" fill-opacity=".06" stroke="white" stroke-opacity=".08"/>
+    <text x="136" y="198" fill="white" font-size="26" font-family="Manrope, Arial, sans-serif" font-weight="800">Источники</text>
+    <g fill="#DCE3FF" fill-opacity=".76" font-size="14" font-family="IBM Plex Sans, Arial, sans-serif">
+      <text x="136" y="234">Трекер</text>
+      <text x="136" y="262">CRM</text>
+      <text x="136" y="290">БД</text>
+      <text x="136" y="318">Таблицы</text>
+    </g>
+  </g>
+
+  <g opacity=".78">
+    <path d="M282 230H334" stroke="#8795D9" stroke-width="2" stroke-dasharray="4 8"/>
+    <path d="M498 230H550" stroke="#8795D9" stroke-width="2" stroke-dasharray="4 8"/>
+    <path d="M714 230H766" stroke="#8795D9" stroke-width="2" stroke-dasharray="4 8"/>
+    <path d="M930 230H982" stroke="#8795D9" stroke-width="2" stroke-dasharray="4 8"/>
+    <path d="M328 230l-12 -8v16l12 -8Z" fill="#8795D9"/>
+    <path d="M544 230l-12 -8v16l12 -8Z" fill="#8795D9"/>
+    <path d="M760 230l-12 -8v16l12 -8Z" fill="#8795D9"/>
+    <path d="M976 230l-12 -8v16l12 -8Z" fill="#8795D9"/>
+  </g>
+
+  <g>
+    <rect x="334" y="152" width="164" height="158" rx="24" fill="white" fill-opacity=".06" stroke="white" stroke-opacity=".08"/>
+    <text x="362" y="198" fill="white" font-size="24" font-family="Manrope, Arial, sans-serif" font-weight="800">Мозг /</text>
+    <text x="362" y="228" fill="white" font-size="24" font-family="Manrope, Arial, sans-serif" font-weight="800">оркестрация</text>
+    <g fill="#DCE3FF" fill-opacity=".76" font-size="14" font-family="IBM Plex Sans, Arial, sans-serif">
+      <text x="362" y="264">Codex</text>
+      <text x="362" y="292">Claude Code</text>
+      <text x="362" y="320">Интеграции</text>
+    </g>
+  </g>
+
+  <g>
+    <rect x="550" y="152" width="164" height="158" rx="24" fill="white" fill-opacity=".06" stroke="white" stroke-opacity=".08"/>
+    <text x="578" y="198" fill="white" font-size="25" font-family="Manrope, Arial, sans-serif" font-weight="800">AI агенты</text>
+    <g fill="#DCE3FF" fill-opacity=".76" font-size="14" font-family="IBM Plex Sans, Arial, sans-serif">
+      <text x="578" y="234">Саппорт</text>
+      <text x="578" y="262">Найм</text>
+      <text x="578" y="290">Dev</text>
+      <text x="578" y="318">Сверки</text>
+    </g>
+  </g>
+
+  <g>
+    <rect x="766" y="152" width="164" height="158" rx="24" fill="white" fill-opacity=".06" stroke="white" stroke-opacity=".08"/>
+    <text x="794" y="198" fill="white" font-size="25" font-family="Manrope, Arial, sans-serif" font-weight="800">Результат</text>
+    <g fill="#DCE3FF" fill-opacity=".76" font-size="14" font-family="IBM Plex Sans, Arial, sans-serif">
+      <text x="794" y="234">Код</text>
+      <text x="794" y="262">Shortlist</text>
+      <text x="794" y="290">Статусы</text>
+      <text x="794" y="318">Сверки</text>
+    </g>
+  </g>
+
+  <g>
+    <rect x="982" y="152" width="186" height="158" rx="24" fill="url(#blueCard)" stroke="white" stroke-opacity=".1"/>
+    <text x="1010" y="198" fill="white" font-size="24" font-family="Manrope, Arial, sans-serif" font-weight="800">Один сильный</text>
+    <text x="1010" y="228" fill="white" font-size="24" font-family="Manrope, Arial, sans-serif" font-weight="800">сотрудник</text>
+    <g fill="#E4EBFF" fill-opacity=".82" font-size="14" font-family="IBM Plex Sans, Arial, sans-serif">
+      <text x="1010" y="264">Принимает</text>
+      <text x="1010" y="292">результат и</text>
+      <text x="1010" y="320">держит приоритет</text>
+    </g>
+  </g>
+
+  <text x="110" y="388" fill="#C7D0F3" fill-opacity=".76" font-size="16" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700" letter-spacing="2">СХЕМА 02. БЫЛО И СТАЛО</text>
+
+  <g>
+    <rect x="108" y="420" width="1060" height="98" rx="24" fill="white" fill-opacity=".04" stroke="white" stroke-opacity=".06"/>
+    <text x="140" y="454" fill="#DCE3FF" fill-opacity=".64" font-size="14" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700" letter-spacing="1.2">БЫЛО</text>
+    <rect x="140" y="468" width="182" height="28" rx="14" fill="white" fill-opacity=".06"/>
+    <text x="165" y="487" fill="white" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">1 человек</text>
+    <path d="M338 482H398" stroke="#8795D9" stroke-width="2" stroke-dasharray="4 8"/>
+    <rect x="398" y="468" width="182" height="28" rx="14" fill="white" fill-opacity=".06"/>
+    <text x="433" y="487" fill="white" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">1 задача</text>
+    <path d="M596 482H656" stroke="#8795D9" stroke-width="2" stroke-dasharray="4 8"/>
+    <rect x="656" y="468" width="230" height="28" rx="14" fill="white" fill-opacity=".06"/>
+    <text x="680" y="487" fill="white" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">поход по соседним функциям</text>
+    <path d="M902 482H962" stroke="#8795D9" stroke-width="2" stroke-dasharray="4 8"/>
+    <rect x="962" y="468" width="172" height="28" rx="14" fill="white" fill-opacity=".06"/>
+    <text x="990" y="487" fill="white" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">один результат</text>
+  </g>
+
+  <g>
+    <rect x="108" y="540" width="1060" height="98" rx="24" fill="url(#greenCard)" stroke="white" stroke-opacity=".08"/>
+    <text x="140" y="574" fill="#D7FF34" fill-opacity=".92" font-size="14" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700" letter-spacing="1.2">СТАЛО</text>
+    <rect x="140" y="588" width="182" height="28" rx="14" fill="white" fill-opacity=".08"/>
+    <text x="165" y="607" fill="white" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">1 человек</text>
+    <path d="M338 602H398" stroke="#D7FF34" stroke-width="2" stroke-dasharray="4 8"/>
+    <rect x="398" y="588" width="196" height="28" rx="14" fill="white" fill-opacity=".08"/>
+    <text x="424" y="607" fill="white" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">до 20 AI агентов</text>
+    <path d="M610 602H670" stroke="#D7FF34" stroke-width="2" stroke-dasharray="4 8"/>
+    <rect x="670" y="588" width="220" height="28" rx="14" fill="white" fill-opacity=".08"/>
+    <text x="694" y="607" fill="white" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">20 задач параллельно</text>
+    <path d="M906 602H966" stroke="#D7FF34" stroke-width="2" stroke-dasharray="4 8"/>
+    <rect x="966" y="588" width="168" height="28" rx="14" fill="white" fill-opacity=".08"/>
+    <text x="986" y="607" fill="white" font-size="15" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">пакет результата</text>
+  </g>
+</svg>

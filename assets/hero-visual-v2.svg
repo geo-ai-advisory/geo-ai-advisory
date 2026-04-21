@@ -1,0 +1,67 @@
+<svg width="1100" height="860" viewBox="0 0 1100 860" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="126" y1="82" x2="902" y2="786" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182238"/>
+      <stop offset="1" stop-color="#121824"/>
+    </linearGradient>
+    <radialGradient id="limeGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(356 140) rotate(44) scale(214 198)">
+      <stop stop-color="#D7FF34" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#D7FF34" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blueGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(796 122) rotate(136) scale(236 232)">
+      <stop stop-color="#667BFF" stop-opacity=".44"/>
+      <stop offset="1" stop-color="#667BFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="core" x1="430" y1="258" x2="698" y2="618" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C965C" stop-opacity=".96"/>
+      <stop offset=".58" stop-color="#445870" stop-opacity=".96"/>
+      <stop offset="1" stop-color="#2F3F61" stop-opacity=".98"/>
+    </linearGradient>
+    <filter id="shadow" x="18" y="18" width="1064" height="824" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="34" stdDeviation="34" flood-color="#0B101B" flood-opacity=".34"/>
+    </filter>
+    <filter id="soft" x="0" y="0" width="1100" height="860" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="52"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#soft)" opacity=".9">
+    <circle cx="336" cy="152" r="124" fill="url(#limeGlow)"/>
+    <circle cx="802" cy="122" r="132" fill="url(#blueGlow)"/>
+    <ellipse cx="560" cy="820" rx="210" ry="44" fill="#0F1728" fill-opacity=".5"/>
+  </g>
+
+  <rect x="52" y="50" width="996" height="760" rx="46" fill="url(#bg)" filter="url(#shadow)"/>
+  <rect x="52" y="50" width="996" height="760" rx="46" stroke="white" stroke-opacity=".06"/>
+
+  <rect x="106" y="108" width="888" height="646" rx="34" fill="white" fill-opacity=".04" stroke="white" stroke-opacity=".08"/>
+  <circle cx="550" cy="430" r="188" stroke="#AAB7F0" stroke-opacity=".22" stroke-dasharray="5 10"/>
+  <circle cx="550" cy="430" r="108" stroke="#D7FF34" stroke-opacity=".28"/>
+  <circle cx="550" cy="430" r="18" fill="#D7FF34" fill-opacity=".86"/>
+
+  <path d="M294 232C382 210 454 224 550 320" stroke="#C8D2FF" stroke-opacity=".22" stroke-dasharray="5 9"/>
+  <path d="M806 248C728 220 650 238 550 320" stroke="#C8D2FF" stroke-opacity=".22" stroke-dasharray="5 9"/>
+  <path d="M302 614C390 650 468 638 550 540" stroke="#C8D2FF" stroke-opacity=".22" stroke-dasharray="5 9"/>
+  <path d="M804 604C712 640 640 632 550 540" stroke="#C8D2FF" stroke-opacity=".22" stroke-dasharray="5 9"/>
+
+  <rect x="394" y="232" width="312" height="392" rx="34" fill="url(#core)" stroke="white" stroke-opacity=".12"/>
+  <text x="550" y="312" text-anchor="middle" fill="#E6ECFF" fill-opacity=".72" font-size="17" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700" letter-spacing="2">ЦЕНТР УПРАВЛЕНИЯ</text>
+  <text x="550" y="394" text-anchor="middle" fill="white" font-size="66" font-family="Manrope, Arial, sans-serif" font-weight="800">1</text>
+  <text x="550" y="474" text-anchor="middle" fill="white" font-size="66" font-family="Manrope, Arial, sans-serif" font-weight="800">сильный</text>
+  <text x="550" y="548" text-anchor="middle" fill="white" font-size="66" font-family="Manrope, Arial, sans-serif" font-weight="800">сотрудник</text>
+
+  <rect x="174" y="184" width="194" height="86" rx="28" fill="white" fill-opacity=".1" stroke="white" stroke-opacity=".08"/>
+  <text x="226" y="238" fill="white" font-size="30" font-family="Manrope, Arial, sans-serif" font-weight="800">Найм</text>
+
+  <rect x="734" y="200" width="200" height="86" rx="28" fill="white" fill-opacity=".12" stroke="white" stroke-opacity=".08"/>
+  <text x="776" y="254" fill="white" font-size="30" font-family="Manrope, Arial, sans-serif" font-weight="800">Разработка</text>
+
+  <rect x="188" y="590" width="186" height="86" rx="28" fill="white" fill-opacity=".1" stroke="white" stroke-opacity=".08"/>
+  <text x="230" y="644" fill="white" font-size="30" font-family="Manrope, Arial, sans-serif" font-weight="800">Саппорт</text>
+
+  <rect x="724" y="582" width="198" height="86" rx="28" fill="white" fill-opacity=".1" stroke="white" stroke-opacity=".08"/>
+  <text x="774" y="636" fill="white" font-size="30" font-family="Manrope, Arial, sans-serif" font-weight="800">Сверки</text>
+
+  <rect x="160" y="700" width="780" height="44" rx="18" fill="white" fill-opacity=".08"/>
+  <text x="550" y="729" text-anchor="middle" fill="white" font-size="21" font-family="IBM Plex Sans, Arial, sans-serif" font-weight="700">1 сильный сотрудник управляет AI-агентами</text>
+</svg>

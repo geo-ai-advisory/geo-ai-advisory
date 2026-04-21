@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Гео в IT — AI-агенты для компаний</title>
+  <style>
+    :root {
+      --font-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    :root {
+      --bg: #f5efe5;
+      --bg-2: #fbf8f3;
+      --ink: #0f1320;
+      --ink-2: #1a2237;
+      --muted: #4a5163;
+      --muted-2: #6b7489;
+      --on-dark: #d4dae6;
+      --on-dark-2: #a5adc3;
+      --line: rgba(15, 19, 32, 0.1);
+      --line-strong: rgba(15, 19, 32, 0.18);
+      --surface: rgba(255, 255, 255, 0.84);
+      --accent: #d8ff2f;
+      --accent-soft: rgba(216, 255, 47, 0.18);
+      --blue: #627aff;
+      --blue-soft: rgba(98, 122, 255, 0.12);
+      --shadow-lg: 0 24px 70px rgba(15, 18, 30, 0.12);
+      --shadow-md: 0 18px 40px rgba(15, 18, 30, 0.08);
+      --shadow-sm: 0 10px 24px rgba(15, 18, 30, 0.06);
+      --radius-xl: 42px;
+      --radius-lg: 30px;
+      --radius-md: 24px;
+      --radius-sm: 18px;
+      --radius-pill: 999px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; min-width: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-text);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 4%, rgba(216, 255, 47, 0.14), transparent 22%),
+        radial-gradient(circle at 90% 6%, rgba(98, 122, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      width: min(1380px, calc(100% - 44px));
+      margin: 26px auto 48px;
+    }
+
+    /* ── Topbar ───────────────────────────────────────────── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 14px 12px 20px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(15, 19, 32, 0.06);
+      box-shadow: 0 12px 32px rgba(15, 18, 30, 0.06);
+      backdrop-filter: blur(20px);
+      margin-bottom: 28px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      flex: 0 0 auto;
+    }
+    .brand-mark {
+      width: 36px; height: 36px; border-radius: 12px;
+      background: linear-gradient(135deg, #0f1320 0%, #1a2237 100%);
+      display: grid; place-items: center;
+      box-shadow: 0 8px 22px rgba(15, 18, 30, 0.22), inset 0 0 0 1px rgba(255,255,255,0.06);
+      position: relative; overflow: hidden;
+    }
+    .brand-mark::after {
+      content: ''; position: absolute;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(216, 255, 47, 0.9);
+    }
+    .brand-mark svg { width: 18px; height: 18px; position: relative; z-index: 1; }
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 17px; font-weight: 800; letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .topnav {
+      display: flex; align-items: center; gap: 4px;
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+    .topnav a {
+      padding: 10px 14px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-size: 14px; font-weight: 600;
+      color: var(--muted);
+      transition: color .18s ease, background .18s ease;
+    }
+    .topnav a:hover {
+      color: var(--ink);
+      background: rgba(15, 19, 32, 0.05);
+    }
+
+    .topbar-cta { flex: 0 0 auto; display: flex; align-items: center; gap: 10px; }
+    .tg-icon {
+      width: 18px; height: 18px;
+      display: inline-block; margin-right: 4px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      padding: 17px 26px;
+      border-radius: var(--radius-pill);
+      border: 0;
+      font-family: var(--font-display);
+      font-size: 15px; font-weight: 800; line-height: 1;
+      cursor: pointer; white-space: nowrap;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--ink);
+      box-shadow: 0 18px 38px rgba(216, 255, 47, 0.32), 0 0 0 0 rgba(216,255,47, 0.35);
+      position: relative; overflow: hidden; z-index: 0;
+      animation: btn-pulse 2.6s ease-in-out infinite;
+      transition: transform .22s ease, box-shadow .28s ease;
+    }
+    .btn-primary::before {
+      content: ''; position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.85) 50%, transparent 65%);
+      mix-blend-mode: overlay;
+      transform: translateX(-130%) skewX(-14deg);
+      animation: btn-shine 3.6s ease-in-out 1.2s infinite;
+      pointer-events: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 26px 54px rgba(216, 255, 47, 0.55), 0 0 0 6px rgba(216,255,47,0.14);
+    }
+    .btn-primary:active { transform: translateY(0) scale(0.99); }
+    @keyframes btn-pulse {
+      0%, 100% { box-shadow: 0 18px 38px rgba(216, 255, 47, 0.32), 0 0 0 0 rgba(216,255,47, 0.4); }
+      50%      { box-shadow: 0 22px 50px rgba(216, 255, 47, 0.6), 0 0 0 10px rgba(216,255,47, 0); }
+    }
+    @keyframes btn-shine {
+      0%, 12%  { transform: translateX(-130%) skewX(-14deg); }
+      50%, 100% { transform: translateX(130%) skewX(-14deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .btn-primary, .btn-primary::before { animation: none; }
+    }
+
+    /* ── Mobile sticky CTA ────────────────────────────────── */
+    .mobile-cta-bar { display: none; }
+    @media (max-width: 760px) {
+      .mobile-cta-bar {
+        display: flex;
+        position: fixed;
+        left: 10px; right: 10px; bottom: 10px;
+        z-index: 60;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(130%);
+        transition: opacity .28s ease, transform .32s cubic-bezier(.22,.9,.3,1);
+        pointer-events: none;
+      }
+      .mobile-cta-bar.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .mobile-cta-bar .btn {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 14px;
+        box-shadow: 0 14px 34px rgba(216,255,47,0.45), 0 0 0 5px rgba(216,255,47,0.1);
+      }
+      .mobile-cta-bar .tg-icon { width: 16px; height: 16px; }
+      /* Topbar на мобилке: компактный pill-бейдж по центру с наслоением на hero */
+      .topbar .topbar-cta { display: none; }
+      .topbar {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        padding: 0;
+        margin: 12px 0 -22px;
+        justify-content: center;
+        position: relative;
+        z-index: 3;
+      }
+      .brand {
+        flex: 0 0 auto;
+        padding: 6px 16px 6px 6px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid rgba(15, 19, 32, 0.08);
+        box-shadow: 0 14px 30px rgba(15, 18, 30, 0.14);
+        gap: 10px;
+      }
+      .brand-mark { width: 28px; height: 28px; border-radius: 9px; }
+      .brand-mark svg { width: 14px; height: 14px; }
+      .brand-title { font-size: 14px; }
+      .hero { padding-top: 44px; }
+    }
+
+    .btn-lg {
+      padding: 22px 34px; font-size: 16.5px; letter-spacing: 0.01em;
+    }
+    .btn-lg .tg-icon { width: 20px; height: 20px; }
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+    .btn-dark {
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 18px 38px rgba(15, 18, 30, 0.28);
+    }
+
+    /* ── Hero ─────────────────────────────────────────────── */
+    .hero {
+      padding: 52px 46px 44px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(216, 255, 47, 0.11), transparent 18%),
+        radial-gradient(circle at 88% 10%, rgba(98, 122, 255, 0.11), transparent 20%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.78) 100%);
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.56fr) minmax(430px, 0.44fr);
+      gap: 42px;
+      align-items: start;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center;
+      padding: 11px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.78);
+      color: #61697a;
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 4.4vw, 3.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+      max-width: 18ch;
+      margin-bottom: 18px;
+    }
+    .hero-title .highlight {
+      display: inline-block;
+      padding: 0 12px;
+      background: var(--accent);
+      border-radius: 12px;
+      box-shadow: 0 10px 26px rgba(216, 255, 47, 0.28);
+      line-height: 1.1;
+    }
+
+    .hero-subhead {
+      max-width: 42ch;
+      color: #354052;
+      font-size: 17px;
+      line-height: 1.55;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .hero-note { color: var(--muted); font-size: 13.5px; line-height: 1.45; max-width: 34rem; margin-top: 12px; }
+
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 26px;
+      align-items: stretch;
+    }
+    .trust-pill {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--line);
+      color: #354052;
+    }
+    .trust-icon {
+      width: 32px; height: 32px;
+      border-radius: 10px;
+      background: rgba(15,19,32,0.05);
+      display: grid; place-items: center;
+      color: var(--ink);
+      flex: 0 0 auto;
+    }
+    .trust-icon svg { width: 18px; height: 18px; }
+    .trust-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .trust-label {
+      font-family: var(--font-display);
+      font-size: 10.5px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .trust-value {
+      font-size: 13.5px; line-height: 1.35;
+      color: var(--ink); font-weight: 500;
+    }
+    .trust-value strong { font-weight: 800; }
+    .trust-pill.accent {
+      background: linear-gradient(135deg, rgba(216, 255, 47, 0.22), rgba(216, 255, 47, 0.08));
+      border-color: rgba(216, 255, 47, 0.45);
+    }
+    .trust-pill.accent .trust-icon {
+      background: var(--accent);
+      box-shadow: 0 6px 18px rgba(216, 255, 47, 0.35);
+    }
+
+    /* ── Start card (hero right) ──────────────────────────── */
+    .start-card {
+      padding: 28px 28px 26px;
+      border-radius: var(--radius-lg);
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .start-head { display: flex; flex-direction: column; gap: 6px; }
+    .start-kicker {
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .start-title {
+      font-family: var(--font-display);
+      font-size: 20px; font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .start-price-row {
+      display: flex; align-items: baseline; gap: 14px;
+      flex-wrap: wrap;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .start-price-num {
+      font-family: var(--font-display);
+      font-size: 38px; font-weight: 800;
+      letter-spacing: -0.04em; line-height: 1;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .start-price-unit {
+      color: var(--muted);
+      font-size: 12.5px; font-weight: 600;
+      line-height: 1.3;
+    }
+    .step-list { display: flex; flex-direction: column; gap: 14px; margin: 0; padding: 0; list-style: none; }
+    .step-list li { display: grid; grid-template-columns: 36px minmax(0,1fr); gap: 14px; align-items: start; }
+    .step-n {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(15,19,32,0.06);
+      display: grid; place-items: center;
+      font-family: var(--font-display);
+      font-size: 13px; font-weight: 800;
+      color: var(--ink);
+      flex: 0 0 auto;
+    }
+    .step-list strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 15px; font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+    .step-list p {
+      font-size: 13.5px; line-height: 1.5;
+      color: #354052;
+    }
+    .start-foot {
+      padding-top: 16px;
+      border-top: 1px dashed var(--line);
+      font-size: 13px; line-height: 1.45;
+      color: var(--muted);
+    }
+    .start-foot strong { color: var(--ink); font-weight: 700; }
+
+    /* ── Section shell ────────────────────────────────────── */
+    .section {
+      margin-top: 68px;
+    }
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .section-head > div { display: flex; flex-direction: column; gap: 10px; }
+    .section-head .section-lead {
+      max-width: 70ch;
+      padding-top: 0;
+      margin-top: -4px;
+    }
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display);
+      color: var(--muted);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .section-eyebrow::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(216, 255, 47, 0.2);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+      max-width: 26ch;
+    }
+    .section-lead {
+      color: #354052;
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 46ch;
+    }
+
+    /* ── Processes (asymmetric) ───────────────────────────── */
+    .processes {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: minmax(220px, auto);
+      gap: 20px;
+    }
+    .p-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.78);
+      padding: 28px 28px 26px;
+      box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column; gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .p-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 90% -20%, rgba(98, 122, 255, 0.08), transparent 40%);
+      pointer-events: none;
+    }
+    .p-card .p-head {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .p-icon {
+      width: 56px; height: 56px; flex: 0 0 auto;
+      background: #fff; border-radius: 18px;
+      border: 1px solid var(--line);
+      display: grid; place-items: center;
+    }
+    .p-icon img { width: 36px; height: 36px; }
+    .p-title {
+      font-family: var(--font-display);
+      font-size: 19px; font-weight: 800; letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    /* Mini-flow (схемки процессов в карточках) */
+    .mini-flow {
+      display: flex; align-items: center; gap: 6px;
+      margin-top: 14px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--line);
+      flex-wrap: wrap;
+    }
+    .mf-item {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 10px;
+      border-radius: 10px;
+      background: rgba(15,19,32,0.05);
+      font-size: 12.5px; font-weight: 600;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+    .mf-item svg { width: 13px; height: 13px; flex: 0 0 auto; color: var(--ink); }
+    .mf-item.accent {
+      background: var(--accent);
+      font-weight: 800;
+      box-shadow: 0 6px 16px rgba(216,255,47,0.28);
+    }
+    .mf-arrow {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+    .p-dev .mini-flow { border-top-color: rgba(255,255,255,0.14); }
+    .p-dev .mf-item {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .p-dev .mf-item svg { color: var(--accent); }
+    .p-dev .mf-arrow { color: var(--on-dark-2); }
+    .p-kicker {
+      display: inline-flex; width: fit-content;
+      padding: 6px 10px;
+      background: var(--accent);
+      color: var(--ink);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .p-dev .p-kicker { color: var(--ink); }
+    .p-list { display: grid; gap: 8px; color: #354052; font-size: 15.5px; line-height: 1.5; }
+    .p-list li { list-style: none; padding-left: 18px; position: relative; }
+    .p-list li::before {
+      content: ''; position: absolute; left: 0; top: 10px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--ink);
+    }
+    .p-big-stat {
+      display: flex; align-items: baseline; gap: 10px;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+    }
+    .p-big-stat-num {
+      font-family: var(--font-display);
+      font-size: 38px; font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .p-big-stat-label {
+      color: var(--muted); font-size: 13px; line-height: 1.4;
+    }
+
+    .p-case-link {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+      font-family: var(--font-display);
+      font-size: 13px; font-weight: 800;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: gap .2s ease;
+    }
+    .p-case-link::after { content: '→'; transition: transform .2s ease; }
+    .p-case-link:hover { gap: 10px; }
+    .p-dev .p-case-link { color: var(--accent); border-top-color: rgba(255,255,255,0.14); }
+
+    /* Asymmetric placements */
+    .p-hr       { grid-column: span 3; }
+    .p-support  { grid-column: span 3; }
+    .p-dev      { grid-column: span 4; background: var(--ink); color: #fff; border-color: rgba(255,255,255,0.1); }
+    .p-dev .p-list { color: var(--on-dark); }
+    .p-dev .p-list li::before { background: var(--accent); }
+    .p-dev .p-big-stat { border-top-color: rgba(255,255,255,0.14); }
+    .p-dev .p-big-stat-label { color: var(--on-dark-2); }
+    .p-dev .p-icon { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); }
+
+    .dev-schema {
+      display: grid; gap: 10px;
+      margin-top: 4px;
+      padding-top: 18px;
+      border-top: 1px dashed rgba(255,255,255,0.14);
+    }
+    .dev-row {
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr) auto;
+      gap: 14px; align-items: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .dev-row.after {
+      background: linear-gradient(135deg, rgba(216,255,47,0.14) 0%, rgba(216,255,47,0.04) 100%);
+      border-color: rgba(216,255,47,0.35);
+    }
+    .dev-label {
+      font-family: var(--font-display);
+      font-size: 10px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--on-dark-2);
+    }
+    .dev-row.after .dev-label { color: var(--accent); }
+    .dev-flow { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: wrap; }
+    .dev-ico {
+      width: 32px; height: 32px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      display: grid; place-items: center;
+      flex: 0 0 auto;
+      color: #fff;
+    }
+    .dev-ico svg { width: 18px; height: 18px; }
+    .dev-ai {
+      width: 34px; height: 32px;
+      border-radius: 10px;
+      background: var(--accent);
+      display: grid; place-items: center;
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 0.03em;
+      flex: 0 0 auto;
+      box-shadow: 0 6px 18px rgba(216,255,47,0.35);
+    }
+    .dev-arrow {
+      color: var(--on-dark-2);
+      font-weight: 700; font-size: 16px;
+      flex: 0 0 auto;
+    }
+    .dev-row.after .dev-arrow { color: var(--accent); }
+    .dev-pill {
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 12px; font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .dev-pills {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 4px;
+      flex: 1 1 auto;
+      min-width: 130px;
+    }
+    .dev-pills span {
+      height: 18px;
+      border-radius: 5px;
+      background: rgba(216,255,47,0.25);
+      border: 1px solid rgba(216,255,47,0.55);
+    }
+    .dev-stat {
+      font-family: var(--font-display);
+      font-size: 13px; font-weight: 800;
+      color: var(--on-dark);
+      white-space: nowrap;
+      text-align: right;
+    }
+    .dev-row.after .dev-stat { color: var(--accent); font-size: 15px; }
+    .p-delivery { grid-column: span 2; }
+    .p-finance  { grid-column: span 3; }
+    .p-ops      { grid-column: span 3; }
+
+    /* ── Why Geo ──────────────────────────────────────────── */
+    .why {
+      padding: 46px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, #ffffff 0%, #fbf8f3 100%);
+      border: 1px solid rgba(255, 255, 255, 0.96);
+      box-shadow: var(--shadow-lg);
+    }
+    .why-header { margin-bottom: 36px; }
+    .why-header .section-title { max-width: 22ch; margin-top: 8px; }
+    .why-lead { color: #354052; font-size: 17px; line-height: 1.55; margin-top: 12px; max-width: 66ch; }
+
+    .journey {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 10px;
+    }
+    .journey-track {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 30px;
+    }
+    .j-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: #c8cdd8;
+      flex: 0 0 auto;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 1px rgba(15,19,32,0.08);
+    }
+    .j-dot.now {
+      width: 22px; height: 22px;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(216,255,47,0.22), 0 0 28px rgba(216,255,47,0.7);
+    }
+    .j-line {
+      width: 2px; flex: 1 0 auto; min-height: 44px;
+      background: repeating-linear-gradient(180deg, #c8cdd8 0 5px, transparent 5px 10px);
+    }
+    .j-line.now {
+      background: linear-gradient(180deg, #c8cdd8 0%, var(--accent) 100%);
+      width: 3px;
+    }
+
+    .journey-stops { display: flex; flex-direction: column; gap: 14px; }
+    .stop {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 22px;
+      border-radius: var(--radius-md);
+      background: #fff;
+      border: 1px solid var(--line);
+      align-items: center;
+    }
+    .stop.now {
+      padding: 28px 30px 30px;
+      background: linear-gradient(135deg, #0f1320 0%, #1a2237 100%);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 28px 60px rgba(15,18,30,0.3), inset 0 0 0 1px rgba(216,255,47,0.14);
+      align-items: start;
+      position: relative;
+      overflow: hidden;
+    }
+    .stop.now::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 92% 0%, rgba(216,255,47,0.14), transparent 40%);
+      pointer-events: none;
+    }
+    .stop.now > * { position: relative; }
+    .stop.now .t-role { color: var(--on-dark); font-size: 15px; }
+
+    .now-content { display: flex; flex-direction: column; gap: 14px; }
+    .now-main { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .now-transform {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 22px;
+      padding: 18px 22px;
+      margin-top: 4px;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(216,255,47,0.18);
+      align-items: center;
+    }
+    .now-num {
+      font-family: var(--font-display);
+      font-size: 46px; font-weight: 800;
+      letter-spacing: -0.04em; line-height: 1;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .now-note { font-size: 13.5px; color: var(--on-dark); line-height: 1.5; }
+    .now-label {
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--on-dark-2);
+      margin-top: 4px;
+    }
+    .now-contours {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .now-contour {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 13px; font-weight: 600;
+      color: #fff;
+    }
+    .now-contour svg { color: var(--accent); flex: 0 0 auto; width: 14px; height: 14px; }
+
+    /* legacy timeline — оставил shadow чтобы не поломать старую разметку */
+    .timeline { display: grid; gap: 14px; }
+    .t-item {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      background: #fff;
+      border: 1px solid var(--line);
+      align-items: center;
+    }
+    .t-logo {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      display: grid; place-items: center;
+      font-family: var(--font-display);
+      font-size: 18px; font-weight: 800; letter-spacing: -0.02em;
+      color: #fff;
+      flex: 0 0 auto;
+    }
+    .t-logo.wb { background: linear-gradient(135deg, #cb11ab 0%, #a001a6 100%); }
+    .t-logo.gz { background: linear-gradient(135deg, #0079c2 0%, #003c71 100%); }
+    .t-logo.ca { background: linear-gradient(135deg, #2b3444 0%, #0f1320 100%); color: var(--accent); }
+    .t-logo.it {
+      background: linear-gradient(135deg, #d8ff2f 0%, #a8e620 100%);
+      color: var(--ink);
+      box-shadow: 0 10px 24px rgba(216, 255, 47, 0.4);
+    }
+    .t-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .t-item.current {
+      background: linear-gradient(135deg, #0f1320 0%, #1a2237 100%);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 20px 40px rgba(15, 18, 30, 0.18);
+    }
+    .t-brand {
+      font-family: var(--font-display);
+      font-size: 20px; font-weight: 800; letter-spacing: -0.02em;
+    }
+    .t-role { font-size: 14px; color: var(--muted); line-height: 1.45; }
+    .t-item.current .t-role { color: var(--on-dark); }
+    .t-badge {
+      display: inline-flex; align-items: center;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-left: 10px;
+    }
+
+    /* ── How it works ─────────────────────────────────────── */
+    .how-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 22px;
+    }
+    .how-card {
+      padding: 38px 36px 34px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, #0f1320 0%, #1a2237 100%);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    .how-card.light {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .how-card h3 {
+      font-family: var(--font-display);
+      font-size: 26px; font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .how-card p { font-size: 15px; line-height: 1.55; color: var(--on-dark); max-width: 40ch; }
+    .how-card.light p { color: #354052; }
+
+    .flow-diagram {
+      margin-top: 26px;
+      display: grid;
+      gap: 14px;
+    }
+    .flow-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center; gap: 10px;
+    }
+    .flow-cell {
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 14px; font-weight: 500; line-height: 1.4;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .flow-cell svg { flex: 0 0 auto; opacity: 0.9; }
+    .flow-cell.accent {
+      background: var(--accent);
+      color: var(--ink);
+      font-weight: 700;
+      border-color: transparent;
+    }
+    .flow-cell.accent svg { opacity: 1; }
+    .flow-cell.single { grid-column: 1 / -1; justify-content: center; }
+    .flow-sources {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .flow-source {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500;
+      color: var(--on-dark);
+    }
+    .flow-source svg { flex: 0 0 auto; }
+    .flow-divider {
+      text-align: center; padding: 4px 0;
+      font-size: 13px; font-weight: 600;
+      color: var(--on-dark-2);
+      letter-spacing: 0.02em;
+    }
+    .flow-arrow {
+      color: var(--accent); font-size: 20px; font-weight: 700;
+      text-align: center;
+    }
+
+    .vs-visual {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+    .vs-side {
+      display: flex; flex-direction: column;
+      padding: 22px 22px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: #fafafa;
+    }
+    .vs-side.after {
+      background: linear-gradient(135deg, rgba(216,255,47,0.18) 0%, rgba(216,255,47,0.04) 100%);
+      border: 1px solid rgba(216,255,47,0.4);
+      box-shadow: 0 18px 40px rgba(216,255,47,0.15);
+    }
+    .vs-side-label {
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .vs-side.after .vs-side-label { color: var(--ink); }
+    .vs-side-title {
+      font-family: var(--font-display);
+      font-size: 18px; font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .vs-svg-wrap {
+      flex: 1 1 auto;
+      display: grid; place-items: center;
+      margin: 6px 0 12px;
+    }
+    .vs-svg { width: 100%; height: auto; max-width: 260px; display: block; }
+    .vs-count {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+    }
+    .vs-side.after .vs-count { border-top-color: rgba(15,19,32,0.15); }
+    .vs-count-num {
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1;
+      white-space: nowrap;
+    }
+    .vs-count-label {
+      color: var(--muted); font-size: 13px; line-height: 1.4;
+      min-width: 0;
+    }
+    .vs-side.after .vs-count-label { color: var(--ink); }
+
+    .vs-divider {
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 800;
+      color: var(--muted);
+      padding: 0 6px;
+    }
+
+    /* ── Offer ────────────────────────────────────────────── */
+    .offer {
+      padding: 52px 46px;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 90% 10%, rgba(98, 122, 255, 0.14), transparent 35%),
+        radial-gradient(circle at 5% 95%, rgba(216, 255, 47, 0.16), transparent 38%),
+        #fff;
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .plans {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .plan {
+      padding: 40px 46px 38px;
+      border-radius: var(--radius-lg);
+      display: grid;
+      grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
+      gap: 46px;
+      align-items: start;
+      position: relative; overflow: hidden;
+    }
+    .plan-single {
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+    }
+    .plan-body { display: flex; flex-direction: column; }
+
+    .offer-next {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 20px; align-items: center;
+      padding: 18px 24px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #0f1320 0%, #1a2237 100%);
+      color: #fff;
+      border: 1px solid rgba(216,255,47,0.14);
+    }
+    .offer-next-tag {
+      display: inline-flex; align-items: center;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(216,255,47,0.22);
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .offer-next-content {
+      font-size: 14.5px; line-height: 1.5;
+      color: var(--on-dark);
+    }
+    .offer-next-content strong { color: #fff; font-weight: 700; }
+    .offer-next-link {
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 14px;
+      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .offer-next-link:hover { gap: 10px; }
+
+    .plan-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      width: fit-content;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      background: rgba(15,19,32,0.06);
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .plan-tag.recommended {
+      background: var(--accent); color: var(--ink);
+      box-shadow: 0 10px 24px rgba(216,255,47,0.3);
+    }
+
+    .plan-price {
+      font-family: var(--font-display);
+      font-size: clamp(3.4rem, 5.4vw, 4.6rem);
+      line-height: 0.95; letter-spacing: -0.05em;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .plan-full .plan-price { color: #fff; }
+    .plan-full .plan-price .accent { color: var(--accent); }
+    .plan-unit {
+      color: var(--muted); font-size: 15px;
+      font-family: var(--font-display); font-weight: 700;
+      margin-bottom: 22px;
+    }
+    .plan-full .plan-unit { color: var(--on-dark); }
+    .plan-desc {
+      font-size: 15.5px; line-height: 1.55;
+      color: #354052;
+      margin-bottom: 22px;
+    }
+    .plan-full .plan-desc { color: var(--on-dark); }
+
+    .plan-bullets { display: grid; gap: 10px; margin-bottom: 28px; }
+    .plan-bullets li {
+      list-style: none;
+      display: grid; grid-template-columns: 20px minmax(0, 1fr);
+      gap: 12px; align-items: start;
+      font-size: 14.5px; line-height: 1.5;
+      color: #354052;
+    }
+    .plan-full .plan-bullets li { color: var(--on-dark); }
+    .plan-bullets li::before {
+      content: '';
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f1320' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center / 12px 12px no-repeat var(--accent);
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+
+    .plan .btn { margin-top: auto; }
+    .plan-single .btn { align-self: flex-start; }
+    .plan-full .btn { align-self: flex-start; }
+
+    .plan-note {
+      margin-top: 14px;
+      font-size: 13px; line-height: 1.5;
+      color: var(--muted);
+    }
+    .plan-full .plan-note { color: var(--on-dark-2); }
+    .o-step-desc { color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+    /* ── Bonus / Gift ─────────────────────────────────────── */
+    .bonus {
+      padding: 52px 46px;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 90% 0%, rgba(216,255,47,0.22), transparent 45%),
+        radial-gradient(circle at 0% 100%, rgba(98,122,255,0.1), transparent 50%),
+        #fff;
+      border: 1px solid rgba(216,255,47,0.3);
+      box-shadow: var(--shadow-lg);
+      position: relative; overflow: hidden;
+    }
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
+      gap: 42px;
+      align-items: start;
+    }
+    .bonus-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      box-shadow: 0 10px 24px rgba(216,255,47,0.32);
+      margin-bottom: 18px;
+    }
+    .bonus-tag svg { width: 14px; height: 14px; }
+    .bonus-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.2vw, 2.8rem);
+      line-height: 1.05; letter-spacing: -0.035em;
+      font-weight: 800;
+      margin-bottom: 14px;
+      max-width: 18ch;
+    }
+    .bonus-desc {
+      color: #354052;
+      font-size: 16px; line-height: 1.55;
+      margin-bottom: 22px;
+      max-width: 48ch;
+    }
+    .bonus-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .bonus-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 13.5px; font-weight: 600;
+      color: var(--ink);
+    }
+    .bonus-item svg { width: 18px; height: 18px; flex: 0 0 auto; color: var(--ink); opacity: 0.75; }
+    .bonus-cta {
+      display: flex; flex-direction: column; gap: 10px;
+      margin-top: 18px;
+    }
+    .bonus-cta .btn { align-self: flex-start; }
+    .bonus-note { font-size: 13px; color: var(--muted); line-height: 1.45; max-width: 46ch; }
+
+    /* ── Final CTA ────────────────────────────────────────── */
+    .final-cta {
+      margin-top: 68px;
+      padding: 64px 46px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, #0f1320 0%, #1a2237 100%);
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .final-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(216, 255, 47, 0.18), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(98, 122, 255, 0.22), transparent 35%);
+      pointer-events: none;
+    }
+    .final-cta > * { position: relative; }
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+      max-width: 18ch;
+      margin: 0 auto 20px;
+    }
+    .final-cta h2 span.mark {
+      background: var(--accent); color: var(--ink);
+      padding: 6px 14px 10px; border-radius: 18px;
+      display: inline-block;
+    }
+    .final-cta p {
+      color: var(--on-dark); font-size: 18px; line-height: 1.55;
+      max-width: 46ch; margin: 0 auto 32px;
+    }
+    .final-cta .btn-primary { padding: 20px 32px; font-size: 16px; }
+    .final-cta .hero-note { color: var(--on-dark-2); margin: 18px auto 0; }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      margin-top: 36px;
+      padding: 24px 8px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px;
+      color: var(--muted); font-size: 13px;
+    }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .section-head,
+      .how-wrap,
+      .plans { grid-template-columns: 1fr; }
+      .hero-visual-wrap { max-width: 760px; }
+      .processes { grid-template-columns: repeat(2, 1fr); }
+      .p-hr, .p-support, .p-dev, .p-delivery, .p-finance, .p-ops { grid-column: span 1; }
+      .p-dev { grid-column: span 2; }
+    }
+
+    @media (max-width: 960px) {
+      .topnav { display: none; }
+    }
+
+    @media (max-width: 760px) {
+      .page { width: calc(100% - 22px); margin-top: 14px; }
+      .hero, .why, .offer, .final-cta { border-radius: 30px; }
+      .topbar { padding: 10px 10px 10px 14px; gap: 12px; }
+      .topbar .btn { padding: 12px 16px; font-size: 13px; }
+      .topbar .tg-icon { width: 15px; height: 15px; }
+      .flow-sources { grid-template-columns: repeat(2, 1fr); }
+      .btn { padding: 15px 22px; }
+      .hero { padding: 26px 18px 22px; }
+      .hero-title { font-size: clamp(1.9rem, 7vw, 2.4rem); max-width: none; line-height: 1.1; }
+      .hero-title .highlight { padding: 0 8px; border-radius: 8px; }
+      .hero-subhead { font-size: 15.5px; }
+      .plan { grid-template-columns: 1fr; gap: 24px; padding: 28px 24px; }
+      .plan-price { font-size: clamp(3rem, 14vw, 4.2rem) !important; }
+      .offer-next { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
+      .trust-row { grid-template-columns: 1fr; gap: 8px; }
+      .trust-pill { padding: 12px 14px; }
+      .trust-value { font-size: 13px; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions .btn { width: 100%; }
+      .section { margin-top: 46px; }
+      .section-title { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .section-lead { font-size: 16px; }
+      .processes { grid-template-columns: 1fr; }
+      .p-hr, .p-support, .p-dev, .p-delivery, .p-finance, .p-ops { grid-column: span 1; }
+      .why, .offer, .final-cta { padding: 30px 22px; }
+      .journey { grid-template-columns: 24px minmax(0, 1fr); gap: 8px; }
+      .stop { grid-template-columns: 44px minmax(0, 1fr); gap: 14px; padding: 14px 16px; }
+      .stop.now { padding: 22px 20px 24px; }
+      .t-logo { width: 44px; height: 44px; font-size: 15px; border-radius: 12px; }
+      .now-transform { grid-template-columns: 1fr; gap: 10px; padding: 16px 18px; }
+      .now-contours { grid-template-columns: repeat(2, 1fr); }
+      .bonus { padding: 32px 22px; }
+      .bonus-grid { grid-template-columns: 1fr; gap: 24px; }
+      .bonus-title { font-size: clamp(1.7rem, 6.4vw, 2.2rem); }
+      .bonus-list { grid-template-columns: 1fr; gap: 8px; }
+      .how-card { padding: 28px 22px 26px; }
+      .t-item { grid-template-columns: 1fr; gap: 4px; }
+      .flow-row { grid-template-columns: 1fr; }
+      .flow-arrow { transform: rotate(90deg); }
+      .vs-visual { grid-template-columns: 1fr; }
+      .vs-divider { transform: rotate(90deg); padding: 6px 0; }
+      .final-cta { padding: 44px 22px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ═══ Topbar ═══════════════════════════════════════════ -->
+    <div class="topbar">
+      <a class="brand" href="#">
+        <div class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>
+          </svg>
+        </div>
+        <div class="brand-title">Geo AI Advisory</div>
+      </a>
+
+      <nav class="topnav">
+        <a href="#processes">Процессы</a>
+        <a href="#why">Почему Гео</a>
+        <a href="#how">Как работает</a>
+        <a href="#offer">Цена</a>
+      </nav>
+
+      <div class="topbar-cta">
+        <a class="btn btn-primary" href="https://t.me/danielspe">
+          <svg class="tg-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21.5 4.2L2.8 11.4c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.2-14.9c.3-1.3-.5-1.8-1.3-1.3z" fill="#0f1320"/>
+          </svg>
+          Написать в Telegram
+        </a>
+      </div>
+    </div>
+
+    <!-- ═══ Hero ═════════════════════════════════════════════ -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="eyebrow">AI-агенты для компаний</div>
+
+          <h1 class="hero-title">
+            Встраиваю <span class="highlight">AI-агентов</span> в&nbsp;работу компании. Чтобы процессы стали быстрее и&nbsp;дешевле.
+          </h1>
+
+          <p class="hero-subhead">
+            Я <strong>Гео</strong>. Помогаю founder, CEO, CPO и&nbsp;Head of выбрать первый дорогой ручной процесс в&nbsp;компании и&nbsp;перевести его на&nbsp;AI-агентов до&nbsp;готового результата.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="https://t.me/danielspe">
+              <svg class="tg-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21.5 4.2L2.8 11.4c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.2-14.9c.3-1.3-.5-1.8-1.3-1.3z" fill="#0f1320"/></svg>
+              Написать в Telegram
+            </a>
+            <a class="btn btn-ghost" href="#processes">Посмотреть кейсы</a>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-pill">
+              <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="5" height="12"/><rect x="9.5" y="3" width="5" height="18"/><rect x="16" y="12" width="5" height="9"/><path d="M2 21h20"/></svg></div>
+              <div class="trust-body">
+                <span class="trust-label">Big&nbsp;tech лидер</span>
+                <span class="trust-value">Управлял командами в&nbsp;<strong>Wildberries</strong> и&nbsp;<strong>Газпроме</strong> — до&nbsp;<strong>2&nbsp;000 чел.</strong></span>
+              </div>
+            </div>
+            <div class="trust-pill">
+              <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg></div>
+              <div class="trust-body">
+                <span class="trust-label">Сейчас</span>
+                <span class="trust-value">Head of Product Growth в&nbsp;крупном <strong>InsurTech</strong></span>
+              </div>
+            </div>
+            <div class="trust-pill accent">
+              <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div>
+              <div class="trust-body">
+                <span class="trust-label">Результат внедрения AI-агентов</span>
+                <span class="trust-value">Команда <strong>60&nbsp;→&nbsp;20</strong>, эффективность <strong>×5</strong> за&nbsp;3&nbsp;мес.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="start-card">
+          <div class="start-head">
+            <div class="start-kicker">Первый шаг</div>
+            <div class="start-title">С чего начинается работа</div>
+          </div>
+
+          <div class="start-price-row">
+            <span class="start-price-num">$500</span>
+            <span class="start-price-unit">за 1 час · или эквивалент в&nbsp;рублях</span>
+          </div>
+
+          <ol class="step-list">
+            <li>
+              <span class="step-n">01</span>
+              <div>
+                <strong>Находим, где уже горит</strong>
+                <p>Где команда теряет деньги и скорость: сверки, саппорт, найм, routing, ручной follow-up.</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-n">02</span>
+              <div>
+                <strong>Выбираем первый сценарий</strong>
+                <p>Не «AI-трансформацию компании», а конкретный процесс, который быстро окупится.</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-n">03</span>
+              <div>
+                <strong>Фиксируем маршрут запуска</strong>
+                <p>Что делать сейчас, чем замерить эффект, когда идти дальше в пакет.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="start-foot">
+            Если fit есть — дальше <strong>пакет из 4 встреч по 2,5 часа</strong> под все ключевые процессы компании.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ═══ Processes ════════════════════════════════════════ -->
+    <section class="section" id="processes">
+      <div class="section-head">
+        <div>
+          <div class="section-eyebrow">Мои реальные кейсы</div>
+          <h2 class="section-title">6 процессов, которые уже держатся на&nbsp;AI у&nbsp;меня</h2>
+        </div>
+        <p class="section-lead">
+          Это не маркетинг про «внедрение нейросетей», а живые контуры моей команды. По каждому — отдельный разбор: что заменили, как считаем эффект и какие грабли словили.
+        </p>
+      </div>
+
+      <div class="processes">
+
+        <!-- HR -->
+        <div class="p-card p-hr">
+          <div class="p-head">
+            <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ghr" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF7FB"/><stop offset="1" stop-color="#FFE4F3"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#ghr)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#E6D8E2"/><circle cx="40" cy="36" r="10" stroke="#1A2237" stroke-width="3"/><path d="M24 64c4-9 11-14 16-14s12 5 16 14" stroke="#1A2237" stroke-width="3" stroke-linecap="round"/><path d="M62 31h12m-6-6v12" stroke="#6077FF" stroke-width="3" stroke-linecap="round"/></svg></div>
+            <div>
+              <div class="p-kicker">HR / найм</div>
+              <div class="p-title">Найм без&nbsp;отдельного HR-контура</div>
+            </div>
+          </div>
+          <ul class="p-list">
+            <li>AI-агенты шерстят hh.ru, LinkedIn и Telegram под конкретный профиль.</li>
+            <li>Раундовая методология: автоскоринг, сравнительный анализ, ранжированный shortlist.</li>
+            <li>Подготовка персональных вопросов и первичная оценка — до моего интервью.</li>
+            <li>Закрывали так Delivery-менеджеров, SRE и продактов без участия HR.</li>
+          </ul>
+          <div class="mini-flow">
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>hh / LinkedIn / TG</span>
+            <span class="mf-arrow">→</span>
+            <span class="mf-item accent"><svg viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI-скоринг</span>
+            <span class="mf-arrow">→</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Shortlist</span>
+          </div>
+          <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
+        </div>
+
+        <!-- Dashboard / Analytics -->
+        <div class="p-card p-support">
+          <div class="p-head">
+            <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gds" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#F0FFF4"/><stop offset="1" stop-color="#D5F7E0"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#gds)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#C8E8D1"/><path d="M22 68L36 52L48 60L66 38L76 46" stroke="#1A2237" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="36" cy="52" r="3.5" fill="#1A2237"/><circle cx="48" cy="60" r="3.5" fill="#1A2237"/><circle cx="66" cy="38" r="3.5" fill="#6077FF"/><circle cx="76" cy="46" r="3.5" fill="#6077FF"/></svg></div>
+            <div>
+              <div class="p-kicker">Аналитика / Dashboard</div>
+              <div class="p-title">Partner-отчёты on&nbsp;the&nbsp;fly</div>
+            </div>
+          </div>
+          <ul class="p-list">
+            <li>SQL → готовая веб-страница партнёру за час, без слайдов и перекладывания цифр.</li>
+            <li>Executive showcase с выводами и рекомендациями, а не просто графики.</li>
+            <li>Аналитика и операционное действие живут в одном контуре: увидел отклонение → тут же поменял правила выдачи.</li>
+          </ul>
+          <div class="p-big-stat">
+            <div class="p-big-stat-num">1 час</div>
+            <div class="p-big-stat-label">от SQL-запроса до готового отчёта партнёру</div>
+          </div>
+          <div class="mini-flow">
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>SQL</span>
+            <span class="mf-arrow">→</span>
+            <span class="mf-item accent"><svg viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI</span>
+            <span class="mf-arrow">→</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>Отчёт партнёру</span>
+          </div>
+          <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
+        </div>
+
+        <!-- Dev (dark wide) -->
+        <div class="p-card p-dev">
+          <div class="p-head">
+            <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gdv" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#F4F7FF"/><stop offset="1" stop-color="#E4EDFF"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#gdv)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#D8E0F0"/><path d="M37 33 24 48l13 15M59 33l13 15-13 15M51 26 44 70" stroke="#1A2237" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="p-kicker">Разработка</div>
+              <div class="p-title">Один разработчик ведёт до&nbsp;10&nbsp;фич параллельно</div>
+            </div>
+          </div>
+          <ul class="p-list">
+            <li>Человек проектирует архитектуру и ревьювит поток — AI пишет код, тесты и документацию.</li>
+            <li>Аналитика, разработка и доставка идут одним циклом, без ручных хендовров.</li>
+          </ul>
+
+          <div class="dev-schema">
+            <div class="dev-row">
+              <div class="dev-label">Было</div>
+              <div class="dev-flow">
+                <div class="dev-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 22c0-4 4-7 8-7s8 3 8 7"/></svg></div>
+                <div class="dev-arrow">→</div>
+                <div class="dev-pill">1 фича</div>
+              </div>
+              <div class="dev-stat">~3 месяца</div>
+            </div>
+            <div class="dev-row after">
+              <div class="dev-label">Стало</div>
+              <div class="dev-flow">
+                <div class="dev-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 22c0-4 4-7 8-7s8 3 8 7"/></svg></div>
+                <div class="dev-ai">AI</div>
+                <div class="dev-arrow">→</div>
+                <div class="dev-pills">
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+              <div class="dev-stat">×10 / неделю</div>
+            </div>
+          </div>
+          <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
+        </div>
+
+        <!-- Delivery / AI PM -->
+        <div class="p-card p-delivery">
+          <div class="p-head">
+            <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gdl" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#F7F3FF"/><stop offset="1" stop-color="#ECE4FF"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#gdl)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#DDD7EF"/><rect x="24" y="24" width="48" height="48" rx="12" stroke="#1A2237" stroke-width="3"/><path d="M34 41h28M34 52h20" stroke="#1A2237" stroke-width="3" stroke-linecap="round"/><path d="m56 25 8 8-20 20h-8v-8l20-20Z" stroke="#6077FF" stroke-width="2.6" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="p-kicker">Delivery / AI PM</div>
+              <div class="p-title">AI-PM ведёт команду за&nbsp;меня</div>
+            </div>
+          </div>
+          <ul class="p-list">
+            <li>AI читает чаты, тикеты и PR — готовит weekly update сам.</li>
+            <li>Собирает риски, блокеры и action items до созвона.</li>
+            <li>Держит follow-up по задачам и напоминает ответственным в Tracker.</li>
+          </ul>
+          <div class="mini-flow">
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Чаты · Tracker · PR</span>
+            <span class="mf-arrow">→</span>
+            <span class="mf-item accent"><svg viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI-PM</span>
+            <span class="mf-arrow">→</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h8"/></svg>Weekly</span>
+          </div>
+          <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
+        </div>
+
+        <!-- Finance / Reconciliation -->
+        <div class="p-card p-finance">
+          <div class="p-head">
+            <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gfn" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFBEF"/><stop offset="1" stop-color="#FFF1C9"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#gfn)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#E8DFC4"/><path d="M24 68h48M30 60V38m16 22V28m16 32V46" stroke="#1A2237" stroke-width="3" stroke-linecap="round"/><path d="M24 28h48" stroke="#6077FF" stroke-width="2.6" stroke-linecap="round"/></svg></div>
+            <div>
+              <div class="p-kicker">Финансы / сверки</div>
+              <div class="p-title">Сверки без ручного Excel</div>
+            </div>
+          </div>
+          <ul class="p-list">
+            <li>Выгрузки вендоров, внутренняя БД и правила комиссий — сводим одним pipeline.</li>
+            <li>Расхождения ловим до денежных потерь, а не после закрытия периода.</li>
+            <li>На стол финансисту попадает только спорное и критичное.</li>
+            <li>Живой кейс: месячная сверка партнёров вместо ручного Excel.</li>
+          </ul>
+          <div class="mini-flow">
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>Вендоры + БД</span>
+            <span class="mf-arrow">→</span>
+            <span class="mf-item accent"><svg viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI-сверка</span>
+            <span class="mf-arrow">→</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>Спорное</span>
+          </div>
+          <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
+        </div>
+
+        <!-- MCP / Integrations -->
+        <div class="p-card p-ops">
+          <div class="p-head">
+            <div class="p-icon"><svg width="36" height="36" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gmc" x1="18" y1="16" x2="80" y2="82" gradientUnits="userSpaceOnUse"><stop stop-color="#F6F7FB"/><stop offset="1" stop-color="#E0E6F5"/></linearGradient></defs><rect x="8" y="8" width="80" height="80" rx="24" fill="url(#gmc)"/><rect x="8" y="8" width="80" height="80" rx="24" stroke="#D0D8EA"/><path d="M32 34 L48 48 L64 34 M48 48 L48 68" stroke="#1A2237" stroke-width="2.6" stroke-linecap="round" fill="none"/><circle cx="32" cy="32" r="8" fill="#fff" stroke="#1A2237" stroke-width="2.6"/><circle cx="64" cy="32" r="8" fill="#fff" stroke="#1A2237" stroke-width="2.6"/><circle cx="48" cy="68" r="8" fill="#d8ff2f" stroke="#1A2237" stroke-width="2.6"/></svg></div>
+            <div>
+              <div class="p-kicker">Интеграции / MCP</div>
+              <div class="p-title">AI с&nbsp;руками: БД, трекер, таблицы, API</div>
+            </div>
+          </div>
+          <ul class="p-list">
+            <li>Подключён к PROD БД — сам пишет SQL, делает сверки и ad-hoc-отчёты.</li>
+            <li>Ходит в Яндекс-Трекер и GitLab: читает статусы, пишет обновления, закрывает задачи.</li>
+            <li>Правит Google Sheets, ведёт реестры и таблицы партнёров.</li>
+            <li>Без MCP это «чат с GPT». С MCP — работающая система.</li>
+          </ul>
+          <div class="mini-flow">
+            <span class="mf-item accent"><svg viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI</span>
+            <span class="mf-arrow">↔</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>БД</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M9 11l2 2 4-4"/></svg>Tracker</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Sheets</span>
+            <span class="mf-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>API</span>
+          </div>
+          <a class="p-case-link" href="https://t.me/danielspe">Обсудить в Telegram</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ Why Geo ══════════════════════════════════════════ -->
+    <section class="section" id="why">
+      <div class="why">
+        <div class="why-header">
+          <div class="section-eyebrow">Почему Гео</div>
+          <h2 class="section-title">Не теория. Живой переход команды на&nbsp;AI прямо сейчас</h2>
+          <p class="why-lead">
+            Путь через big tech, enterprise и&nbsp;продукт — до&nbsp;живого перехода команды на&nbsp;AI-модель, который идёт прямо сейчас.
+          </p>
+        </div>
+
+        <div class="journey">
+          <div class="journey-track">
+            <span class="j-dot"></span>
+            <span class="j-line"></span>
+            <span class="j-dot"></span>
+            <span class="j-line"></span>
+            <span class="j-dot"></span>
+            <span class="j-line now"></span>
+            <span class="j-dot now"></span>
+          </div>
+
+          <div class="journey-stops">
+            <div class="stop">
+              <div class="t-logo wb">WB</div>
+              <div class="t-body">
+                <div class="t-brand">Wildberries</div>
+                <div class="t-role">PO в&nbsp;одном из&nbsp;крупнейших бигтехов РФ. Масштаб до&nbsp;2&nbsp;000 человек, высокая скорость изменений.</div>
+              </div>
+            </div>
+            <div class="stop">
+              <div class="t-logo gz">ГП</div>
+              <div class="t-body">
+                <div class="t-brand">Газпром</div>
+                <div class="t-role">Enterprise-процессы: сложные регламенты, большие бюджеты и&nbsp;тяжёлые согласования.</div>
+              </div>
+            </div>
+            <div class="stop">
+              <div class="t-logo ca">CA</div>
+              <div class="t-body">
+                <div class="t-brand">ChatApp</div>
+                <div class="t-role">Продукт с&nbsp;нуля: product management, аналитика, рост и&nbsp;быстрые релизные циклы.</div>
+              </div>
+            </div>
+
+            <div class="stop now">
+              <div class="t-logo it">IT</div>
+              <div class="now-content">
+                <div class="now-main">
+                  <div class="t-brand">Крупный InsurTech</div>
+                  <span class="t-badge">Сейчас</span>
+                </div>
+                <div class="t-role">Head of Product Growth. Перевожу операционку компании на&nbsp;AI-агентов — от&nbsp;бухгалтерии до&nbsp;разработки.</div>
+
+                <div class="now-transform">
+                  <div class="now-num">60&nbsp;→&nbsp;20</div>
+                  <div class="now-note">
+                    За 3 месяца без потери продукта: команда перестроена вокруг AI-агентов. <strong style="color:#fff">Эффективность ×5:</strong> 20 человек сегодня делают работу прежних 2&nbsp;000.
+                  </div>
+                </div>
+
+                <div class="now-label">6 контуров уже на AI</div>
+                <div class="now-contours">
+                  <div class="now-contour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Тесты</div>
+                  <div class="now-contour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Саппорт</div>
+                  <div class="now-contour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Финансы</div>
+                  <div class="now-contour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Разработка</div>
+                  <div class="now-contour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>HR / найм</div>
+                  <div class="now-contour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Product mgmt</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ How it works ═════════════════════════════════════ -->
+    <section class="section" id="how">
+      <div class="section-head">
+        <div>
+          <div class="section-eyebrow">Как это работает</div>
+          <h2 class="section-title">Один человек ведёт до&nbsp;10&nbsp;задач параллельно</h2>
+        </div>
+        <p class="section-lead">
+          Не один чат с GPT — целая рабочая система. Вот как идёт задача и во что превращается работа сотрудника.
+        </p>
+      </div>
+
+      <div class="how-wrap">
+
+        <!-- Diagram 1: flow -->
+        <div class="how-card">
+          <h3>Путь задачи</h3>
+          <p>Данные компании идут в оркестратора, он раздаёт работу AI-агентам и возвращает готовый результат человеку.</p>
+          <div class="flow-diagram">
+            <div class="flow-sources">
+              <div class="flow-source">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+                CRM
+              </div>
+              <div class="flow-source">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                База данных
+              </div>
+              <div class="flow-source">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M9 11l2 2 4-4M16 2v4M8 2v4M3 10h18"/></svg>
+                Трекер
+              </div>
+              <div class="flow-source">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+                Таблицы
+              </div>
+              <div class="flow-source">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/></svg>
+                Регламенты
+              </div>
+              <div class="flow-source">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                API и системы
+              </div>
+            </div>
+
+            <div class="flow-divider">↓</div>
+
+            <div class="flow-row">
+              <div class="flow-cell accent single" style="justify-content:center">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                Оркестратор AI-агентов
+              </div>
+            </div>
+
+            <div class="flow-divider">↓ раздаёт работу ↓</div>
+
+            <div class="flow-row">
+              <div class="flow-cell">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                Агент найма
+              </div>
+              <div class="flow-arrow">·</div>
+              <div class="flow-cell">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8l-8 8M8 8l8 8"/></svg>
+                Агент сверок
+              </div>
+            </div>
+            <div class="flow-row">
+              <div class="flow-cell">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                Агент delivery
+              </div>
+              <div class="flow-arrow">·</div>
+              <div class="flow-cell">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d8ff2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg>
+                Агент саппорта
+              </div>
+            </div>
+
+            <div class="flow-divider">↓</div>
+
+            <div class="flow-row">
+              <div class="flow-cell accent single" style="justify-content:center">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f1320" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Один человек принимает работу и даёт новую команду
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diagram 2: before/after -->
+        <div class="how-card light">
+          <h3>Было / стало</h3>
+          <p>Сильный сотрудник больше не решает одну задачу — он управляет потоком.</p>
+
+          <div class="vs-visual">
+            <!-- BEFORE -->
+            <div class="vs-side">
+              <div class="vs-side-label">Было</div>
+              <div class="vs-side-title">1 человек = 1 задача</div>
+              <div class="vs-svg-wrap">
+                <svg class="vs-svg" viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- human -->
+                  <circle cx="130" cy="36" r="12" fill="#0f1320"/>
+                  <rect x="116" y="50" width="28" height="20" rx="4" fill="#0f1320"/>
+                  <!-- single line -->
+                  <path d="M130 76 L130 130" stroke="#667085" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="3 4"/>
+                  <path d="M124 126 L130 134 L136 126" stroke="#667085" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <!-- single task -->
+                  <rect x="102" y="140" width="56" height="24" rx="6" fill="#fff" stroke="#0f1320" stroke-width="1.6"/>
+                  <text x="130" y="157" text-anchor="middle" font-family="var(--font-text)" font-size="11" font-weight="600" fill="#0f1320">задача</text>
+                </svg>
+              </div>
+              <div class="vs-count">
+                <span class="vs-count-num">×1</span>
+                <span class="vs-count-label">Фича, тикет, отчёт — месяцы на исполнение</span>
+              </div>
+            </div>
+
+            <div class="vs-divider">→</div>
+
+            <!-- AFTER -->
+            <div class="vs-side after">
+              <div class="vs-side-label">Стало</div>
+              <div class="vs-side-title">1 человек = до 10 задач</div>
+              <div class="vs-svg-wrap">
+                <svg class="vs-svg" viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="vsGlow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#d8ff2f" stop-opacity="0.55"/>
+                      <stop offset="100%" stop-color="#d8ff2f" stop-opacity="0"/>
+                    </radialGradient>
+                  </defs>
+                  <!-- glow around human -->
+                  <circle cx="130" cy="42" r="40" fill="url(#vsGlow)"/>
+                  <!-- fan lines to 10 dots -->
+                  <g stroke="#d8ff2f" stroke-width="1.2" opacity="0.85" stroke-linecap="round">
+                    <line x1="130" y1="72" x2="14"  y2="158"/>
+                    <line x1="130" y1="72" x2="40"  y2="158"/>
+                    <line x1="130" y1="72" x2="66"  y2="158"/>
+                    <line x1="130" y1="72" x2="92"  y2="158"/>
+                    <line x1="130" y1="72" x2="118" y2="158"/>
+                    <line x1="130" y1="72" x2="144" y2="158"/>
+                    <line x1="130" y1="72" x2="170" y2="158"/>
+                    <line x1="130" y1="72" x2="196" y2="158"/>
+                    <line x1="130" y1="72" x2="222" y2="158"/>
+                    <line x1="130" y1="72" x2="248" y2="158"/>
+                  </g>
+                  <!-- 10 task dots -->
+                  <g fill="#0f1320">
+                    <circle cx="14"  cy="158" r="4"/>
+                    <circle cx="40"  cy="158" r="4"/>
+                    <circle cx="66"  cy="158" r="4"/>
+                    <circle cx="92"  cy="158" r="4"/>
+                    <circle cx="118" cy="158" r="4"/>
+                    <circle cx="144" cy="158" r="4"/>
+                    <circle cx="170" cy="158" r="4"/>
+                    <circle cx="196" cy="158" r="4"/>
+                    <circle cx="222" cy="158" r="4"/>
+                    <circle cx="248" cy="158" r="4"/>
+                  </g>
+                  <!-- human on top -->
+                  <circle cx="130" cy="36" r="12" fill="#0f1320"/>
+                  <rect x="116" y="50" width="28" height="20" rx="4" fill="#0f1320"/>
+                </svg>
+              </div>
+              <div class="vs-count">
+                <span class="vs-count-num">×10</span>
+                <span class="vs-count-label">Параллельных задач через AI-агентов</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ Offer ════════════════════════════════════════════ -->
+    <section class="section" id="offer">
+      <div class="offer">
+        <div class="section-head" style="margin-bottom: 28px;">
+          <div>
+            <div class="section-eyebrow">Форматы работы</div>
+            <h2 class="section-title">Что вы покупаете</h2>
+          </div>
+          <p class="section-lead">
+            Можно начать с одной встречи и проверить подход. Можно сразу взять полный пакет — перевод компании на AI от бухгалтерии до разработки.
+          </p>
+        </div>
+
+        <div class="plans">
+
+          <!-- Main: $500 per hour -->
+          <div class="plan plan-single">
+            <div>
+              <div class="plan-tag">Первый шаг</div>
+              <div class="plan-price">$500</div>
+              <div class="plan-unit">за 1 час · или эквивалент в рублях</div>
+              <p class="plan-desc">
+                Первый разбор вашей компании. Находим самый дорогой ручной процесс и фиксируем маршрут запуска для первого AI-агента. После этого решаете, продолжать или нет.
+              </p>
+            </div>
+            <div class="plan-body">
+              <ul class="plan-bullets">
+                <li>Час живой работы с Гео по вашему контуру</li>
+                <li>Карта узких мест: где деньги утекают в ручную работу</li>
+                <li>Первый процесс под AI-агента — с самым коротким путём к результату</li>
+                <li>Маршрут запуска на одной странице</li>
+              </ul>
+              <a class="btn btn-primary btn-lg" href="https://t.me/danielspe">
+                <svg class="tg-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21.5 4.2L2.8 11.4c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.2-14.9c.3-1.3-.5-1.8-1.3-1.3z" fill="#0f1320"/></svg>
+                Написать в Telegram
+              </a>
+            </div>
+          </div>
+
+          <!-- Next step note: 4 sessions package -->
+          <div class="offer-next">
+            <span class="offer-next-tag">Если fit есть</span>
+            <span class="offer-next-content">Дальше — <strong>пакет из 4 встреч по 2,5 часа</strong> под все ключевые процессы компании, от бухгалтерии до разработки. Длительность каждой встречи продлевается при необходимости.</span>
+            <a class="offer-next-link" href="https://t.me/danielspe">Узнать детали →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Bonus / Gift ════════════════════════════════════ -->
+    <section class="section" id="bonus">
+      <div class="bonus">
+        <div class="bonus-grid">
+          <div>
+            <div class="bonus-tag">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+              Бесплатный подарок
+            </div>
+            <h2 class="bonus-title">Мой набор скиллов для Claude Code и&nbsp;Codex</h2>
+            <p class="bonus-desc">
+              Готовые скиллы, которыми я&nbsp;пользуюсь каждый день: Яндекс-Трекер, Google&nbsp;Drive/Sheets, Telegram, Telemost, HTML-отчёты, Playwright и&nbsp;другие рутины. Забирай, ставь у&nbsp;себя и&nbsp;автоматизируй то&nbsp;же самое.
+            </p>
+            <div class="bonus-cta">
+              <a class="btn btn-primary btn-lg" href="https://github.com/engwatch/geo-ai-advisory">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#0f1320" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+                Забрать на&nbsp;GitHub
+              </a>
+              <div class="bonus-note">Публичный репозиторий, MIT-лицензия. Никаких регистраций и&nbsp;форм — просто клонируй.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="bonus-list">
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M9 11l2 2 4-4M16 2v4M8 2v4M3 10h18"/></svg>Яндекс-Трекер</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Google Sheets / Drive</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.2 2.8 11.4c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.2-14.9c.3-1.3-.5-1.8-1.3-1.3z"/></svg>Telegram-боты</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Telemost + Calendar</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>HTML-отчёты</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>hh.ru-скоринг</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>Playwright-автоматизация</div>
+              <div class="bonus-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4zM4 14h16v6H4zM4 8l2 6M20 8l-2 6"/></svg>Whisper-транскрипции</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Final CTA ════════════════════════════════════════ -->
+    <section class="final-cta">
+      <h2>Кто не встроит <span class="mark">AI сейчас</span>, проиграет по скорости.</h2>
+      <p>Каждый месяц промедления — это чужие интеграции, чужой найм и чужая себестоимость поддержки.</p>
+      <a class="btn btn-primary btn-lg" href="https://t.me/danielspe">
+        <svg class="tg-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21.5 4.2L2.8 11.4c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.2-14.9c.3-1.3-.5-1.8-1.3-1.3z" fill="#0f1320"/>
+        </svg>
+        Написать Гео в Telegram
+      </a>
+      <div class="hero-note">Пара строк в Telegram — этого хватит, чтобы выбрать первый процесс.</div>
+    </section>
+
+    <footer>
+      <div>© Гео в IT · AI-агенты для компаний</div>
+      <div><a href="https://t.me/danielspe">t.me/danielspe</a></div>
+    </footer>
+
+  </div>
+
+  <div class="mobile-cta-bar" aria-hidden="true">
+    <a class="btn btn-primary btn-lg" href="https://t.me/danielspe">
+      <svg class="tg-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21.5 4.2L2.8 11.4c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.5c.2.6.1.8.7.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.2-14.9c.3-1.3-.5-1.8-1.3-1.3z" fill="#0f1320"/></svg>
+      Написать в Telegram
+    </a>
+  </div>
+
+  <script>
+    (function() {
+      var bar = document.querySelector('.mobile-cta-bar');
+      var trigger = document.querySelector('.hero-actions .btn-primary');
+      if (!bar || !trigger) return;
+      function update() {
+        var rect = trigger.getBoundingClientRect();
+        // показываем когда кнопка hero ушла за верх экрана
+        var visible = rect.bottom < 0;
+        bar.classList.toggle('visible', visible);
+        bar.setAttribute('aria-hidden', visible ? 'false' : 'true');
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    })();
+  </script>
+</body>
+</html>
